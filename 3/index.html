@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STUDIO — Creative Technology</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<!-- CANVAS -->
+<canvas id="bg-canvas"></canvas>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo"><span>◈</span> STUDIO — CT</div>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#capabilities">Studio</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="hero-tag">Creative Technology — Est. 2024</div>
+    <h1 class="hero-headline">
+      We build<br>
+      <span class="line-accent">what doesn't</span>
+      <span class="line-accent" style="-webkit-text-stroke: 1px rgba(117,26,46,0.3);">exist yet.</span>
+    </h1>
+    <div class="hero-meta">
+      <p class="hero-desc">
+        A studio at the intersection of visual craft,<br>
+        engineering precision, and applied intelligence —<br>
+        shaping the tools and interfaces of what's next.
+      </p>
+      <div class="hero-coords">
+        40.7128° N, 74.0060° W<br>
+        SYS:ONLINE — BUILD:2406<br>
+        THREADS: 12 / ACTIVE
+      </div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    Scroll to explore
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track" id="marquee">
+    <div class="marquee-item"><span class="dot"></span> Generative AI</div>
+    <div class="marquee-item"><span class="dot"></span> Interaction Design</div>
+    <div class="marquee-item"><span class="dot"></span> Intelligent Tooling</div>
+    <div class="marquee-item"><span class="dot"></span> Full-Stack Development</div>
+    <div class="marquee-item"><span class="dot"></span> Design Systems</div>
+    <div class="marquee-item"><span class="dot"></span> Workflow Automation</div>
+    <div class="marquee-item"><span class="dot"></span> Creative Engineering</div>
+    <div class="marquee-item"><span class="dot"></span> Applied Intelligence</div>
+    <div class="marquee-item"><span class="dot"></span> Generative AI</div>
+    <div class="marquee-item"><span class="dot"></span> Interaction Design</div>
+    <div class="marquee-item"><span class="dot"></span> Intelligent Tooling</div>
+    <div class="marquee-item"><span class="dot"></span> Full-Stack Development</div>
+    <div class="marquee-item"><span class="dot"></span> Design Systems</div>
+    <div class="marquee-item"><span class="dot"></span> Workflow Automation</div>
+    <div class="marquee-item"><span class="dot"></span> Creative Engineering</div>
+    <div class="marquee-item"><span class="dot"></span> Applied Intelligence</div>
+  </div>
+</div>
+
+<!-- WORK -->
+<section class="work" id="work">
+  <div class="section-header reveal">
+    <span class="section-num">01</span>
+    <span class="section-title">Selected Work</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="work-grid">
+    <!-- Item 1 -->
+    <div class="work-item reveal">
+      <div class="work-item-inner">
+        <div class="work-item-visual">
+          <svg class="visual-waveform" viewBox="0 0 600 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="0,80 30,80 40,20 50,140 60,50 70,110 80,80 120,80 130,35 140,125 150,65 160,95 170,80 220,80 230,10 240,150 250,40 260,120 270,55 280,105 290,80 360,80 370,45 380,115 390,70 400,90 410,80 460,80 470,25 480,135 490,60 500,100 510,80 560,80 570,50 580,110 590,75 600,80"
+              stroke="#210675" stroke-width="1.5" fill="none" opacity="0.6"/>
+            <line x1="0" y1="80" x2="600" y2="80" stroke="rgba(33,6,117,0.15)" stroke-width="0.5" stroke-dasharray="4,8"/>
+          </svg>
+        </div>
+        <div class="work-item-top">
+          <div class="work-tag">AI Infrastructure</div>
+          <h3 class="work-name">Signal<br>Intelligence<br>Platform</h3>
+        </div>
+        <div class="work-item-bottom">
+          <p class="work-desc">Real-time data pipeline with AI-driven classification and anomaly detection.</p>
+          <div class="work-arrow">↗</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Item 2 -->
+    <div class="work-item reveal reveal-delay-1">
+      <div class="work-item-inner">
+        <div class="work-item-visual">
+          <svg class="visual-radial" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="110" cy="110" r="100" stroke="rgba(117,26,46,0.35)" stroke-width="0.5"/>
+            <circle cx="110" cy="110" r="75" stroke="rgba(117,26,46,0.28)" stroke-width="0.5"/>
+            <circle cx="110" cy="110" r="50" stroke="rgba(117,26,46,0.2)" stroke-width="0.5"/>
+            <circle cx="110" cy="110" r="25" stroke="rgba(117,26,46,0.15)" stroke-width="0.5"/>
+            <line x1="10" y1="110" x2="210" y2="110" stroke="rgba(117,26,46,0.15)" stroke-width="0.5"/>
+            <line x1="110" y1="10" x2="110" y2="210" stroke="rgba(117,26,46,0.15)" stroke-width="0.5"/>
+            <line x1="39" y1="39" x2="181" y2="181" stroke="rgba(117,26,46,0.1)" stroke-width="0.5"/>
+            <line x1="181" y1="39" x2="39" y2="181" stroke="rgba(117,26,46,0.1)" stroke-width="0.5"/>
+            <circle cx="110" cy="10" r="3" fill="#751A2E" opacity="0.7"/>
+            <circle cx="210" cy="110" r="3" fill="#751A2E" opacity="0.7"/>
+            <circle cx="110" cy="210" r="3" fill="#751A2E" opacity="0.5"/>
+            <circle cx="10" cy="110" r="3" fill="#751A2E" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="work-item-top">
+          <div class="work-tag">Design System</div>
+          <h3 class="work-name">Compass<br>Design OS</h3>
+        </div>
+        <div class="work-item-bottom">
+          <p class="work-desc">Component library and token system powering 6 product surfaces.</p>
+          <div class="work-arrow">↗</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Item 3 -->
+    <div class="work-item reveal reveal-delay-2">
+      <div class="work-item-inner">
+        <div class="work-item-visual">
+          <svg viewBox="0 0 300 300" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="dotgrid" width="20" height="20" patternUnits="userSpaceOnUse">
+                <circle cx="10" cy="10" r="0.8" fill="rgba(33,6,117,0.4)"/>
+              </pattern>
+            </defs>
+            <rect width="300" height="300" fill="url(#dotgrid)"/>
+            <rect x="60" y="60" width="180" height="180" stroke="rgba(33,6,117,0.25)" stroke-width="0.5" fill="none"/>
+            <rect x="100" y="100" width="100" height="100" stroke="rgba(33,6,117,0.15)" stroke-width="0.5" fill="none"/>
+          </svg>
+        </div>
+        <div class="work-item-top">
+          <div class="work-tag">Automation</div>
+          <h3 class="work-name">Process<br>Architect</h3>
+        </div>
+        <div class="work-item-bottom">
+          <p class="work-desc">LLM-powered workflow engine for creative production pipelines.</p>
+          <div class="work-arrow">↗</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Item 4 -->
+    <div class="work-item reveal reveal-delay-3">
+      <div class="work-item-inner">
+        <div class="work-item-visual">
+          <svg viewBox="0 0 800 200" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="matrixFade" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#210675" stop-opacity="0"/>
+                <stop offset="30%" stop-color="#210675" stop-opacity="0.6"/>
+                <stop offset="70%" stop-color="#751A2E" stop-opacity="0.6"/>
+                <stop offset="100%" stop-color="#751A2E" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <text x="20" y="30" font-family="DM Mono, monospace" font-size="11" fill="url(#matrixFade)" opacity="0.9">01001101 01101111 01100100 01100101 01101100 00100000 01110100 01110010 01100001 01101001 01101110 01101001 01101110 01100111</text>
+            <text x="20" y="60" font-family="DM Mono, monospace" font-size="11" fill="url(#matrixFade)" opacity="0.7">token_embed → attention → ffn → norm → logits → sample → decode → stream</text>
+            <text x="20" y="90" font-family="DM Mono, monospace" font-size="11" fill="url(#matrixFade)" opacity="0.5">∑ w_i · x_i + b → σ(z) → ∇L(θ) → θ - α∇L(θ) → converge</text>
+            <text x="20" y="120" font-family="DM Mono, monospace" font-size="11" fill="url(#matrixFade)" opacity="0.4">context_window: 200k → retrieval: dense+sparse → rerank → synthesize → cite</text>
+            <text x="20" y="150" font-family="DM Mono, monospace" font-size="11" fill="url(#matrixFade)" opacity="0.3">01110100 01110010 01100001 01101110 01110011 01100110 01101111 01110010 01101101 00100000 01100001 01110010 01100011 01101000</text>
+          </svg>
+        </div>
+        <div class="work-item-top">
+          <div class="work-tag">LLM Tooling</div>
+          <h3 class="work-name">Foundation<br>Model Interface</h3>
+        </div>
+        <div class="work-item-bottom">
+          <p class="work-desc">Unified evaluation and prompt management layer across multiple model providers.</p>
+          <div class="work-arrow">↗</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAPABILITIES -->
+<section class="capabilities" id="capabilities">
+  <div class="cap-left reveal">
+    <div class="section-header" style="margin-bottom:40px">
+      <span class="section-num">02</span>
+      <span class="section-title">Studio</span>
+      <div class="section-line"></div>
+    </div>
+    <p class="cap-statement">
+      We collapse the distance between<br>
+      <em>an idea</em> and<br>
+      a working thing.
+    </p>
+    <p class="cap-body">
+      Our team is a rare synthesis — visual designers who write code,<br>
+      engineers who obsess over aesthetics, and strategists who build.<br>
+      We operate in the space where none of those roles cleanly fit.
+    </p>
+  </div>
+  <div class="cap-right reveal reveal-delay-1">
+    <ul class="cap-list">
+      <li><span>AI Product Design</span><span class="cap-num">01</span></li>
+      <li><span>Generative Tooling</span><span class="cap-num">02</span></li>
+      <li><span>Design Systems</span><span class="cap-num">03</span></li>
+      <li><span>Full-Stack Development</span><span class="cap-num">04</span></li>
+      <li><span>Workflow Automation</span><span class="cap-num">05</span></li>
+      <li><span>Interaction Engineering</span><span class="cap-num">06</span></li>
+      <li><span>Research + Prototyping</span><span class="cap-num">07</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <h2 class="contact-headline reveal">
+    Let's build<br>
+    <span class="outline">something</span><br>
+    <span class="outline">new.</span>
+  </h2>
+  <div class="contact-action reveal reveal-delay-2">
+    <a href="mailto:studio@example.com" class="btn-primary">
+      Start a conversation
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2026 STUDIO — CT. ALL RIGHTS RESERVED.</span>
+  <span class="status">SYS:ONLINE ● BUILD:2406</span>
+  <span>NEW YORK, NY</span>
+</footer>
+
+<!-- CHAT BAR -->
+<div class="chat-bar">
+  <button class="chat-trigger" id="chatTrigger" onclick="toggleChat()">
+    <div class="chat-status-dot"></div>
+    <span class="chat-placeholder">Ask anything about our work or process...</span>
+    <span class="chat-label">AI ◈</span>
+  </button>
+  <button class="chat-icon-btn" onclick="toggleChat()">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M8 1C4.13 1 1 3.91 1 7.5c0 1.55.57 2.97 1.51 4.08L1.5 14l2.6-.98A7.15 7.15 0 008 14c3.87 0 7-2.91 7-6.5S11.87 1 8 1z" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/>
+    </svg>
+  </button>
+</div>
+
+<!-- CHAT POPUP -->
+<div class="chat-popup" id="chatPopup">
+  <div class="chat-popup-header">
+    <div class="chat-popup-title">
+      <div class="dot"></div>
+      Studio AI — Ask us anything
+    </div>
+    <button class="chat-close" onclick="toggleChat()">Close ✕</button>
+  </div>
+  <div class="chat-messages" id="chatMessages">
+    <div class="msg">
+      <div class="msg-avatar">AI</div>
+      <div class="msg-bubble">Hello — I'm the studio's AI assistant. Ask me about our work, process, capabilities, or how we might collaborate.</div>
+    </div>
+  </div>
+  <div class="chat-input-row">
+    <input class="chat-input" id="chatInput" type="text" placeholder="Type your question..." onkeydown="handleKey(event)"/>
+    <button class="chat-send" onclick="sendMessage()">Send →</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
