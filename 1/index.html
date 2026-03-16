@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Strand — Creative Technology</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Editorial+New:ital@0;1&family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<div class="strand-mode">
+  <div class="mode-dot active" data-section="hero"></div>
+  <div class="mode-dot" data-section="work"></div>
+  <div class="mode-dot" data-section="cap"></div>
+  <div class="mode-dot" data-section="phil"></div>
+  <div class="mode-dot" data-section="contact"></div>
+</div>
+
+<nav>
+  <a class="nav-logo" href="#">STR<span>∧</span>ND</a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#capabilities">Capabilities</a></li>
+    <li><a href="#philosophy">Approach</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta">Let's Build</button>
+</nav>
+
+<section class="hero" id="hero-section">
+  <canvas id="dna-canvas"></canvas>
+  <div id="interaction-layer"></div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Creative Technology Studio — Est. 2024</p>
+    <h1 class="hero-title">The <em>code</em><br>in our DNA</h1>
+    <p class="hero-sub">A studio of designers, engineers, and technologists who build with intelligence — bridging elite craft with emerging tools to deliver work that evolves.</p>
+    <div class="hero-actions">
+      <a href="#work" class="btn-primary">View Our Work</a>
+      <a href="#contact" class="btn-ghost">Start a Conversation</a>
+    </div>
+  </div>
+
+  <div class="scroll-hint"><div class="scroll-line"></div><span>Scroll</span></div>
+  <div class="dna-hint"><span>Move &amp; Click</span><div class="hint-dot"></div></div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item">Generative AI</div><div class="marquee-item">Interaction Design</div>
+    <div class="marquee-item">Creative Engineering</div><div class="marquee-item">Machine Learning</div>
+    <div class="marquee-item">Design Systems</div><div class="marquee-item">Prompt Architecture</div>
+    <div class="marquee-item">Motion &amp; UX</div><div class="marquee-item">Data Visualization</div>
+    <div class="marquee-item">LLM Tooling</div>
+    <div class="marquee-item">Generative AI</div><div class="marquee-item">Interaction Design</div>
+    <div class="marquee-item">Creative Engineering</div><div class="marquee-item">Machine Learning</div>
+    <div class="marquee-item">Design Systems</div><div class="marquee-item">Prompt Architecture</div>
+    <div class="marquee-item">Motion &amp; UX</div><div class="marquee-item">Data Visualization</div>
+    <div class="marquee-item">LLM Tooling</div>
+  </div>
+</div>
+
+<section class="intro" id="about">
+  <div class="intro-left reveal">
+    <p class="intro-label">// Who We Are</p>
+    <h2 class="intro-heading">Where <em>creativity</em><br>and code<br>share a helix</h2>
+  </div>
+  <div class="intro-right reveal reveal-delay-2">
+    <p class="intro-body">
+      STRAND is a creative technology team fluent in both <strong>design craft and software engineering</strong>. We operate at the exact intersection where ambitious visual ideas require serious technical depth to execute.<br/><br/>
+      Our work lives in the space that most agencies can't reach — where the design system needs to think, the interface needs to respond, and the experience needs to learn.
+    </p>
+    <div class="strand-pillars">
+      <div class="pillar"><div class="pillar-num">01</div><div class="pillar-name">Visual Design</div><div class="pillar-desc">Craft-first design with systems thinking built in from day one</div></div>
+      <div class="pillar"><div class="pillar-num">02</div><div class="pillar-name">Engineering</div><div class="pillar-desc">Production-grade code that scales and performs without compromise</div></div>
+      <div class="pillar"><div class="pillar-num">03</div><div class="pillar-name">AI Tooling</div><div class="pillar-desc">Custom models, pipelines, and intelligent interfaces that ship</div></div>
+      <div class="pillar"><div class="pillar-num">04</div><div class="pillar-name">Strategy</div><div class="pillar-desc">We challenge weak briefs and drive toward measurable outcomes</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="work" id="work">
+  <div class="section-header reveal">
+    <div><p class="section-label">// Selected Work</p><h2 class="section-title">What we've built</h2></div>
+    <a href="#" class="section-link">Full archive</a>
+  </div>
+  <div class="work-grid">
+    <div class="work-card featured reveal">
+      <div class="work-card-inner">
+        <div class="work-card-top"><span class="work-tag">AI Tooling</span><span class="work-arrow">↗</span></div>
+        <div>
+          <h3 class="work-card-title">Intelligent<br>Brief System</h3>
+          <p class="work-card-desc">A generative AI layer that transforms rough creative briefs into structured strategy docs, referencing project history and brand constraints automatically.</p>
+          <p class="work-card-meta">GPT-4 · Vector Embeddings · React</p>
+        </div>
+      </div>
+    </div>
+    <div class="work-small-grid">
+      <div class="work-card work-small reveal reveal-delay-1">
+        <div class="work-card-inner">
+          <div class="work-card-top"><span class="work-tag">Design System</span><span class="work-arrow">↗</span></div>
+          <div><h3 class="work-card-title">Adaptive Component Library</h3><p class="work-card-desc">Token-driven design system that updates at runtime based on brand context.</p></div>
+        </div>
+      </div>
+      <div class="work-card work-small reveal reveal-delay-2">
+        <div class="work-card-inner">
+          <div class="work-card-top"><span class="work-tag">Visualization</span><span class="work-arrow">↗</span></div>
+          <div><h3 class="work-card-title">Data Narrative Engine</h3><p class="work-card-desc">LLM-powered system that converts raw analytics into editorial-quality data stories.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="capabilities" id="capabilities">
+  <div class="section-header reveal">
+    <div><p class="section-label">// What We Do</p><h2 class="section-title">Our capabilities</h2></div>
+  </div>
+  <div class="cap-grid">
+    <div class="cap-item reveal">
+      <svg class="cap-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="20" cy="20" r="8"/><path d="M20 4v6M20 30v6M4 20h6M30 20h6M7.5 7.5l4.2 4.2M28.3 28.3l4.2 4.2M32.5 7.5l-4.2 4.2M11.7 28.3l-4.2 4.2"/>
+      </svg>
+      <h3 class="cap-title">AI &amp; Machine Learning</h3>
+      <p class="cap-desc">Custom AI systems, not API wrappers. From fine-tuned models to RAG pipelines and agentic workflows, we engineer intelligence that integrates cleanly into real products.</p>
+      <ul class="cap-list"><li>LLM Integration</li><li>Vector Search</li><li>Prompt Engineering</li><li>AI Agents</li><li>Fine-tuning</li></ul>
+    </div>
+    <div class="cap-item reveal reveal-delay-1">
+      <svg class="cap-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="4" y="8" width="32" height="24" rx="2"/><path d="M13 16l-5 4 5 4M27 16l5 4-5 4M22 14l-4 12"/>
+      </svg>
+      <h3 class="cap-title">Creative Engineering</h3>
+      <p class="cap-desc">We collapse the gap between design intention and production reality. Our engineers speak design fluently — we build the things that are "impossible" to hand off.</p>
+      <ul class="cap-list"><li>React / Next.js</li><li>Three.js / WebGL</li><li>Motion Design</li><li>Design Systems</li><li>Headless CMS</li></ul>
+    </div>
+    <div class="cap-item reveal reveal-delay-2">
+      <svg class="cap-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M8 36V20l12-16 12 16v16"/><path d="M16 36v-8h8v8"/>
+      </svg>
+      <h3 class="cap-title">UX &amp; Product Design</h3>
+      <p class="cap-desc">Research-backed design that reduces friction and increases meaning. We prototype fast, test with real users, and deliver design that actually ships.</p>
+      <ul class="cap-list"><li>User Research</li><li>Interaction Design</li><li>Prototyping</li><li>WCAG Compliance</li><li>Data Viz</li></ul>
+    </div>
+  </div>
+</section>
+
+<section class="philosophy" id="philosophy">
+  <div class="reveal">
+    <p class="section-label">// Our Approach</p>
+    <h2 class="phil-heading">We build what <em>evolves.</em></h2>
+  </div>
+  <div class="reveal reveal-delay-2">
+    <blockquote class="phil-quote">"The most dangerous phrase in any brief is 'we've always done it this way.'"</blockquote>
+    <p class="phil-body">Technology is not neutral. The tools we use shape what we're able to imagine. That's why we operate at the cutting edge of what's buildable — not to use new tools for novelty, but because they genuinely expand the solution space.<br/><br/>Our team is structured as a single cell with multiple strands: visual talent, engineering depth, and strategic clarity bound together. Not a relay race. A helix.</p>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="reveal">
+    <p class="section-label">// Get In Touch</p>
+    <h2 class="contact-heading">Let's build<br>something <em>inevitable.</em></h2>
+  </div>
+  <div class="reveal reveal-delay-2">
+    <p class="contact-body">We work with brands, startups, and product teams who need more than execution — they need a partner who can shape what's possible. If that's you, let's talk.</p>
+    <a href="mailto:hello@strand.studio" class="contact-email">hello@strand.studio</a>
+  </div>
+</section>
+
+<footer>
+  <p class="footer-copy">© 2024 Strand Studio — Creative Technology</p>
+  <ul class="footer-links">
+    <li><a href="#">Twitter</a></li><li><a href="#">LinkedIn</a></li>
+    <li><a href="#">Github</a></li><li><a href="#">Dribbble</a></li>
+  </ul>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
