@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>HELIX — AI Coding Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Cormorant+SC:wght@300;400&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">HELIX</a>
+  <ul class="nav-links">
+    <li><a href="#capabilities">Capabilities</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#manifesto">Manifesto</a></li>
+    <li><a href="#docs">Docs</a></li>
+  </ul>
+  <button class="nav-pill">Early Access</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <canvas id="dna-canvas"></canvas>
+  <div id="hit-layer"></div>
+
+  <div class="hero-left">
+    <p class="hero-eyebrow">AI-Native Coding Intelligence</p>
+    <h1 class="hero-title">HELIX</h1>
+    <p class="hero-tagline">
+      Code that carries its own<br>
+      <em>intelligence</em> in every strand.
+    </p>
+    <div class="hero-actions">
+      <a href="#" class="btn-pri">Start Building</a>
+      <a href="#capabilities" class="btn-sec">See What's Possible</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="h-label">
+      <div class="label-title">Architecture</div>
+      <div class="label-val">Context-aware reasoning</div>
+    </div>
+    <div class="h-label">
+      <div class="label-title">Model</div>
+      <div class="label-val">Trained on 40B tokens of code</div>
+    </div>
+    <div class="h-label">
+      <div class="label-title">Latency</div>
+      <div class="label-val">&lt; 80ms median response</div>
+    </div>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="scroll-label">Scroll to explore</div>
+  </div>
+</section>
+
+<div class="shimmer"></div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="reveal">
+    <p class="sec-eye">// The Intelligence</p>
+    <h2 class="about-h">
+      Code that<br><em>understands</em><br>itself.
+    </h2>
+    <p class="about-body">
+      HELIX is not an autocomplete engine. It is a <strong>reasoning layer</strong> woven into your development environment — one that reads architecture, infers intent, and writes code that fits the system it's entering.
+      <br/><br/>
+      Built on a model trained exclusively on production codebases, HELIX understands context the way a senior engineer does: not just what the function should do, but why it exists and what it's part of.
+    </p>
+  </div>
+  <div class="stats reveal rd2">
+    <div class="stat">
+      <span class="stat-n">40B</span>
+      <span class="stat-l">Training Tokens</span>
+    </div>
+    <div class="stat">
+      <span class="stat-n">97.4%</span>
+      <span class="stat-l">Benchmark Accuracy</span>
+    </div>
+    <div class="stat">
+      <span class="stat-n">12×</span>
+      <span class="stat-l">Context Window vs GPT-4</span>
+    </div>
+    <div class="stat">
+      <span class="stat-n">&lt;80ms</span>
+      <span class="stat-l">Median Response Time</span>
+    </div>
+  </div>
+</section>
+
+<div class="shimmer"></div>
+
+<!-- CAPABILITIES -->
+<section class="caps" id="capabilities">
+  <div class="caps-header reveal">
+    <h2 class="caps-h">Capabilities</h2>
+    <a href="#" class="caps-link">Full Documentation →</a>
+  </div>
+  <div class="cap-grid">
+    <div class="cap reveal">
+      <div class="cap-idx">01</div>
+      <h3 class="cap-title">Deep Context<br>Synthesis</h3>
+      <div class="cap-sub">Codebase Intelligence</div>
+      <p class="cap-desc">HELIX ingests your entire repository — architecture, naming conventions, test patterns, dependencies — and codes from within that understanding, not alongside it.</p>
+      <div class="cap-pills"><span class="pill">RAG</span><span class="pill">AST Parsing</span><span class="pill">Semantic Search</span></div>
+    </div>
+    <div class="cap reveal rd1">
+      <div class="cap-idx">02</div>
+      <h3 class="cap-title">Agentic<br>Refactoring</h3>
+      <div class="cap-sub">Autonomous Engineering</div>
+      <p class="cap-desc">Describe the outcome, not the steps. HELIX plans a multi-file refactor, validates against your test suite, and iterates until it passes — without you touching a single file.</p>
+      <div class="cap-pills"><span class="pill">Multi-file</span><span class="pill">Test-driven</span><span class="pill">Self-healing</span></div>
+    </div>
+    <div class="cap reveal rd2">
+      <div class="cap-idx">03</div>
+      <h3 class="cap-title">Realtime<br>Pair Review</h3>
+      <div class="cap-sub">Collaborative Intelligence</div>
+      <p class="cap-desc">Not a linter. HELIX reviews code the way a principal engineer would: flagging logical flaws, architectural drift, security exposure, and performance cliffs before they merge.</p>
+      <div class="cap-pills"><span class="pill">Security</span><span class="pill">Architecture</span><span class="pill">Performance</span></div>
+    </div>
+    <div class="cap reveal">
+      <div class="cap-idx">04</div>
+      <h3 class="cap-title">Natural Language<br>to API</h3>
+      <div class="cap-sub">Interface Generation</div>
+      <p class="cap-desc">Describe an endpoint in plain language. HELIX generates the route, schema, validation, error handling, and OpenAPI documentation — wired into your existing framework.</p>
+      <div class="cap-pills"><span class="pill">REST</span><span class="pill">GraphQL</span><span class="pill">OpenAPI</span></div>
+    </div>
+    <div class="cap reveal rd1">
+      <div class="cap-idx">05</div>
+      <h3 class="cap-title">Test Suite<br>Synthesis</h3>
+      <div class="cap-sub">Quality Assurance</div>
+      <p class="cap-desc">HELIX writes tests that actually cover what matters — edge cases, failure modes, and integration surfaces — derived from its understanding of your system, not just the function signature.</p>
+      <div class="cap-pills"><span class="pill">Unit</span><span class="pill">Integration</span><span class="pill">E2E</span></div>
+    </div>
+    <div class="cap reveal rd2">
+      <div class="cap-idx">06</div>
+      <h3 class="cap-title">Architecture<br>Advisor</h3>
+      <div class="cap-sub">Strategic Intelligence</div>
+      <p class="cap-desc">Ask HELIX why a system is slow, where coupling is creating risk, or how to migrate toward an event-driven model. It reasons across your codebase and answers with evidence.</p>
+      <div class="cap-pills"><span class="pill">Profiling</span><span class="pill">Coupling Analysis</span><span class="pill">Migration Plans</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="reveal">
+    <p class="sec-eye">// The Process</p>
+    <h2 class="about-h">
+      How the<br><em>strand</em><br>thinks.
+    </h2>
+  </div>
+  <div class="how-steps reveal rd2">
+    <div class="step">
+      <div class="step-n">I</div>
+      <div>
+        <div class="step-title">Ingest your repository</div>
+        <div class="step-desc">HELIX parses your AST, indexes semantics, maps dependencies, and builds a living model of your codebase. Not chunked text — structured understanding.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">II</div>
+      <div>
+        <div class="step-title">Reason about intent</div>
+        <div class="step-desc">Every request is contextualized against your architecture before a single token is generated. HELIX asks: what is this system trying to do? What would fit?</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">III</div>
+      <div>
+        <div class="step-title">Generate with precision</div>
+        <div class="step-desc">Code output matches your conventions, naming patterns, error-handling style, and test coverage requirements — because it learned them from you.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">IV</div>
+      <div>
+        <div class="step-title">Validate and iterate</div>
+        <div class="step-desc">HELIX runs your tests, interprets failures, and self-corrects — completing the loop without switching context or writing a single prompt.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="shimmer"></div>
+
+<!-- MANIFESTO -->
+<section class="manifesto" id="manifesto">
+  <p class="man-eye reveal">// Why We Built This</p>
+  <h2 class="man-h reveal rd1">
+    Intelligence woven<br>into the <em>structure</em><br>of code itself.
+  </h2>
+  <p class="man-body reveal rd2">
+    Every great codebase has a double helix at its core: the logic of what it does, and the intent of why it exists. Most AI tools only read one strand. HELIX was built to hold both — and to write from that deeper understanding.
+  </p>
+  <a href="#" class="man-cta reveal rd3">Request Early Access</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="f-copy">© 2025 Helix Intelligence, Inc.</p>
+  <ul class="f-links">
+    <li><a href="#">Docs</a></li>
+    <li><a href="#">Blog</a></li>
+    <li><a href="#">GitHub</a></li>
+    <li><a href="#">Careers</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
