@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Creative Technology Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- ── CANVAS (home bg) ── -->
+<canvas id="hero-canvas"></canvas>
+
+<!-- ── NAV ── -->
+<nav id="nav">
+  <div class="nav-logo">Studio / CT</div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a data-page="home" class="active">Home</a></li>
+      <li><a data-page="work">Work</a></li>
+      <li><a data-page="home">Capabilities</a></li>
+      <li><a data-page="home">Contact</a></li>
+    </ul>
+    <div class="present-toggle" id="presentToggle">
+      <div class="toggle-dot"></div>
+      Present
+    </div>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════
+     HOME PAGE
+════════════════════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <div class="hero">
+    <p class="hero-eyebrow">Creative Technology — AI Native</p>
+    <h1 class="hero-headline">We build<br><em>what doesn't</em><br>exist yet.</h1>
+    <p class="hero-sub">A team of designers, engineers, and builders operating at the intersection of AI, craft, and shipping real product.</p>
+    <div class="hero-cta-row">
+      <span class="cta-primary" data-page="work">View Work</span>
+      <span class="cta-secondary">Our Approach</span>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+
+  <div class="ticker-wrap">
+    <div class="ticker-track" id="ticker"></div>
+  </div>
+
+  <section class="about">
+    <div>
+      <p class="about-label">/ Studio</p>
+      <h2 class="about-statement">Design and engineering aren't separate disciplines. They never were.</h2>
+    </div>
+    <div class="about-body">
+      <p>We're a creative technologist team embedded in the leading edge — using AI as raw material, not a shortcut. Our work lives where visual craft meets systems thinking, where a prototype ships as a product.</p>
+      <p>We move fast because our tools move fast. We ship quality because we've earned the judgment to know what it looks like.</p>
+    </div>
+  </section>
+
+  <section class="capabilities">
+    <div class="cap-header">
+      <span class="section-label">/ Capabilities</span>
+      <span class="cap-count">06 disciplines</span>
+    </div>
+    <div class="cap-list">
+      <div class="cap-item"><p class="cap-num">01</p><h3 class="cap-title">AI-Native Engineering</h3><p class="cap-desc">LLM integration, agent architecture, and production AI tooling built with real operational discipline.</p></div>
+      <div class="cap-item"><p class="cap-num">02</p><h3 class="cap-title">Creative Development</h3><p class="cap-desc">Three.js, GSAP, generative systems — visual engineering that earns its complexity.</p></div>
+      <div class="cap-item"><p class="cap-num">03</p><h3 class="cap-title">Design Systems</h3><p class="cap-desc">Component architecture, token infrastructure, and the governance that makes them last at scale.</p></div>
+      <div class="cap-item"><p class="cap-num">04</p><h3 class="cap-title">Rapid Prototyping</h3><p class="cap-desc">From concept to functional artifact in days. We prototype to learn, not to perform.</p></div>
+      <div class="cap-item"><p class="cap-num">05</p><h3 class="cap-title">UX Research &amp; Strategy</h3><p class="cap-desc">Evidence-grounded decisions. We find the problem before we fall in love with the solution.</p></div>
+      <div class="cap-item"><p class="cap-num">06</p><h3 class="cap-title">Platform &amp; Tooling</h3><p class="cap-desc">We build the tools that help teams build better — internal, external, and everything in between.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-mark">CT/</div>
+    <div class="footer-links">
+      <a data-page="work">Work</a>
+      <a>Capabilities</a>
+      <a>Contact</a>
+    </div>
+  </footer>
+
+</div><!-- /page-home -->
+
+<!-- ════════════════════════════════════════
+     WORK PAGE
+════════════════════════════════════════ -->
+<div class="page" id="page-work">
+
+  <header class="page-header">
+    <h1 class="page-title">Work</h1>
+    <div class="page-meta">
+      <p class="page-meta-label">Projects</p>
+      <p class="page-meta-count">06</p>
+    </div>
+  </header>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="ai">AI Tooling</button>
+    <button class="filter-btn" data-filter="creative">Creative Dev</button>
+    <button class="filter-btn" data-filter="platform">Platform</button>
+    <button class="filter-btn" data-filter="research">Research</button>
+  </div>
+
+  <main class="work-grid" id="workGrid"></main>
+
+  <footer>
+    <div class="footer-mark">CT/</div>
+    <div class="footer-links">
+      <a data-page="home">Home</a>
+      <a>Capabilities</a>
+      <a>Contact</a>
+    </div>
+  </footer>
+
+</div><!-- /page-work -->
+
+<!-- ── PRESENTATION OVERLAY ── -->
+<div class="pres-overlay" id="presOverlay">
+  <div class="pres-bar">
+    <div class="pres-brand">Studio / CT — Work</div>
+    <div class="pres-counter"><span id="presCurrentLabel">01</span> / <span id="presTotalLabel">06</span></div>
+    <button class="pres-close" id="presClose">✕ Exit Presentation</button>
+  </div>
+  <div class="pres-stage">
+    <div class="pres-slides" id="presSlides"></div>
+    <div class="pres-sidebar" id="presSidebar"></div>
+  </div>
+  <div class="pres-controls">
+    <button class="pres-btn" id="presPrev">&#8592;</button>
+    <div class="pres-progress"><div class="pres-progress-fill" id="presProgressFill"></div></div>
+    <button class="pres-btn" id="presNext">&#8594;</button>
+  </div>
+  <div class="pres-hint" id="presHint">Use ← → arrow keys to navigate</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

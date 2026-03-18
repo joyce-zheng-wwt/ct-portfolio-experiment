@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Creative Technology Studio</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --white:#ffffff;--off:#e8e8e4;--mid:#888880;
+  --dim:#2e2e2c;--dimmer:#1a1a18;--bg:#080808;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden;}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:28px 48px;
+  background:rgba(8,8,8,0.85);backdrop-filter:blur(12px);
+  border-bottom:1px solid transparent;transition:border-color 0.3s;
+}
+nav.scrolled{border-color:var(--dim);}
+.nav-logo{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;letter-spacing:0.2em;text-transform:uppercase;opacity:0;animation:fadeUp 1s ease 0.3s forwards;}
+.nav-right{display:flex;align-items:center;gap:40px;}
+.nav-links{display:flex;gap:32px;list-style:none;opacity:0;animation:fadeUp 1s ease 0.5s forwards;}
+.nav-links a{font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--mid);text-decoration:none;transition:color 0.3s;cursor:pointer;}
+.nav-links a:hover,.nav-links a.active{color:var(--white);}
+.present-toggle{
+  display:none;align-items:center;gap:10px;
+  font-size:11px;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--mid);cursor:pointer;
+  border:1px solid var(--dim);padding:8px 16px;
+  transition:all 0.3s;user-select:none;
+}
+.present-toggle.visible{display:flex;}
+.present-toggle:hover{border-color:var(--mid);color:var(--white);}
+.present-toggle.active{border-color:var(--white);background:var(--white);color:var(--bg);}
+.toggle-dot{width:6px;height:6px;border-radius:50%;background:currentColor;}
+
+/* ── PAGES ── */
+.page{display:none;min-height:100vh;}
+.page.active{display:block;}
+
+/* ════════════════════════════════════════
+   HOME PAGE
+════════════════════════════════════════ */
+#hero-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;}
+
+.hero{
+  position:relative;z-index:10;
+  min-height:100vh;display:flex;flex-direction:column;
+  justify-content:flex-end;padding:0 48px 80px;pointer-events:none;
+}
+.hero-eyebrow{font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:var(--mid);margin-bottom:24px;opacity:0;animation:fadeUp 1s ease 0.8s forwards;}
+.hero-headline{font-family:'Space Grotesk',sans-serif;font-size:clamp(52px,8vw,120px);font-weight:300;line-height:0.92;letter-spacing:-0.03em;color:var(--white);max-width:900px;opacity:0;animation:fadeUp 1.1s ease 1s forwards;}
+.hero-headline em{font-style:normal;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,0.5);}
+.hero-sub{margin-top:32px;font-size:15px;font-weight:300;line-height:1.7;color:var(--mid);max-width:420px;opacity:0;animation:fadeUp 1s ease 1.3s forwards;}
+.hero-cta-row{margin-top:48px;display:flex;align-items:center;gap:32px;pointer-events:all;opacity:0;animation:fadeUp 1s ease 1.5s forwards;}
+.cta-primary{font-size:12px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--bg);background:var(--white);padding:14px 28px;text-decoration:none;cursor:pointer;transition:background 0.3s;}
+.cta-primary:hover{background:var(--off);}
+.cta-secondary{font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--mid);text-decoration:none;display:flex;align-items:center;gap:8px;cursor:pointer;transition:color 0.3s;}
+.cta-secondary:hover{color:var(--white);}
+.cta-secondary::after{content:'→';font-size:14px;}
+
+.scroll-hint{position:fixed;bottom:40px;right:48px;z-index:20;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeIn 1s ease 2s forwards;}
+.scroll-hint span{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--dim);writing-mode:vertical-rl;}
+.scroll-line{width:1px;height:60px;background:linear-gradient(to bottom,var(--dim),transparent);animation:scrollPulse 2s ease-in-out infinite;}
+
+.ticker-wrap{position:relative;z-index:10;overflow:hidden;border-top:1px solid var(--dim);border-bottom:1px solid var(--dim);background:var(--bg);padding:16px 0;}
+.ticker-track{display:flex;width:max-content;animation:ticker 30s linear infinite;}
+.ticker-item{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--dim);padding:0 40px;white-space:nowrap;}
+
+.about{padding:120px 48px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;border-bottom:1px solid var(--dim);position:relative;z-index:10;background:var(--bg);}
+.about-label{font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:var(--dim);margin-bottom:32px;}
+.about-statement{font-family:'Space Grotesk',sans-serif;font-size:clamp(28px,3vw,42px);font-weight:300;line-height:1.2;letter-spacing:-0.02em;}
+.about-body{padding-top:52px;font-size:14px;font-weight:300;line-height:1.85;color:var(--mid);max-width:480px;}
+.about-body p+p{margin-top:20px;}
+
+.capabilities{padding:120px 48px;border-bottom:1px solid var(--dim);position:relative;z-index:10;background:var(--bg);}
+.cap-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:64px;}
+.section-label{font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:var(--dim);}
+.cap-count{font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:0.1em;color:var(--dim);}
+.cap-list{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--dim);border:1px solid var(--dim);}
+.cap-item{background:var(--bg);padding:40px 36px;transition:background 0.3s;cursor:default;}
+.cap-item:hover{background:#111110;}
+.cap-num{font-size:11px;letter-spacing:0.15em;color:var(--dim);margin-bottom:20px;}
+.cap-title{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:400;color:var(--white);margin-bottom:16px;}
+.cap-desc{font-size:13px;font-weight:300;line-height:1.7;color:var(--mid);}
+
+/* ════════════════════════════════════════
+   WORK PAGE
+════════════════════════════════════════ */
+#page-work{background:var(--bg);}
+.page-header{padding:160px 48px 80px;border-bottom:1px solid var(--dim);display:flex;justify-content:space-between;align-items:flex-end;}
+.page-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(64px,9vw,128px);font-weight:300;letter-spacing:-0.04em;line-height:0.9;}
+.page-meta-label{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--dim);margin-bottom:8px;text-align:right;}
+.page-meta-count{font-family:'Space Grotesk',sans-serif;font-size:48px;font-weight:300;color:var(--mid);}
+
+.filter-bar{padding:24px 48px;border-bottom:1px solid var(--dim);display:flex;align-items:center;gap:8px;}
+.filter-btn{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;padding:7px 14px;border:1px solid var(--dim);color:var(--mid);cursor:pointer;background:none;transition:all 0.25s;}
+.filter-btn:hover{border-color:var(--mid);color:var(--white);}
+.filter-btn.active{border-color:var(--white);color:var(--white);}
+
+.work-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;padding:2px;}
+.work-card{background:var(--dimmer);cursor:pointer;position:relative;overflow:hidden;transition:background 0.3s;opacity:0;transform:translateY(20px);animation:fadeUp 0.6s ease forwards;}
+.work-card:hover{background:#111110;}
+.card-thumb{width:100%;aspect-ratio:16/9;overflow:hidden;position:relative;}
+.card-thumb img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;filter:grayscale(20%);}
+.work-card:hover .card-thumb img{transform:scale(1.04);}
+.card-thumb-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(8,8,8,0.6));}
+.card-body{padding:32px 36px 36px;}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;}
+.card-tag{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);border:1px solid var(--dim);padding:4px 10px;}
+.card-year{font-size:11px;color:var(--dim);}
+.card-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(22px,2.5vw,30px);font-weight:400;line-height:1.15;margin-bottom:12px;}
+.card-desc{font-size:13px;font-weight:300;line-height:1.75;color:var(--mid);max-width:420px;}
+.card-arrow{position:absolute;bottom:36px;right:36px;font-size:20px;color:var(--dim);transition:color 0.3s,transform 0.3s;}
+.work-card:hover .card-arrow{color:var(--white);transform:translate(3px,-3px);}
+.work-card:nth-child(1){animation-delay:0.0s;}
+.work-card:nth-child(2){animation-delay:0.1s;}
+.work-card:nth-child(3){animation-delay:0.2s;}
+.work-card:nth-child(4){animation-delay:0.3s;}
+.work-card:nth-child(5){animation-delay:0.4s;}
+.work-card:nth-child(6){animation-delay:0.5s;}
+
+/* ── PRESENTATION MODE ── */
+body.present-mode{overflow:hidden;}
+.pres-overlay{position:fixed;inset:0;z-index:500;background:var(--bg);display:none;flex-direction:column;}
+body.present-mode .pres-overlay{display:flex;}
+.pres-bar{flex:0 0 64px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;border-bottom:1px solid var(--dim);}
+.pres-brand{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;}
+.pres-counter{font-family:'Space Grotesk',sans-serif;font-size:13px;color:var(--mid);letter-spacing:0.1em;}
+.pres-counter span{color:var(--white);}
+.pres-close{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--mid);cursor:pointer;padding:8px 16px;border:1px solid var(--dim);transition:all 0.25s;background:none;}
+.pres-close:hover{border-color:var(--white);color:var(--white);}
+.pres-stage{flex:1;display:flex;align-items:stretch;overflow:hidden;}
+.pres-slides{flex:1;position:relative;overflow:hidden;}
+.pres-slide{position:absolute;inset:0;display:grid;grid-template-columns:55% 45%;opacity:0;transform:translateX(40px);transition:opacity 0.5s ease,transform 0.5s ease;pointer-events:none;}
+.pres-slide.active{opacity:1;transform:translateX(0);pointer-events:all;}
+.pres-slide.prev{opacity:0;transform:translateX(-40px);}
+.slide-visual{position:relative;overflow:hidden;background:#0d0d0c;}
+.slide-visual img{width:100%;height:100%;object-fit:cover;filter:grayscale(15%);}
+.slide-visual-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.03) 0%,transparent 60%);}
+.slide-content{padding:64px 56px;display:flex;flex-direction:column;justify-content:space-between;border-left:1px solid var(--dim);overflow-y:auto;}
+.slide-eyebrow{font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--dim);margin-bottom:8px;}
+.slide-tag{display:inline-block;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);border:1px solid var(--dim);padding:5px 12px;margin-bottom:32px;}
+.slide-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,3.5vw,52px);font-weight:300;line-height:1.1;letter-spacing:-0.02em;margin-bottom:28px;}
+.slide-desc{font-size:14px;font-weight:300;line-height:1.85;color:var(--mid);margin-bottom:36px;}
+.slide-details{display:flex;flex-direction:column;gap:16px;border-top:1px solid var(--dim);padding-top:24px;}
+.slide-detail-row{display:flex;justify-content:space-between;align-items:baseline;}
+.slide-detail-label{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--dim);}
+.slide-detail-val{font-size:13px;font-weight:300;color:var(--off);}
+.slide-tech{display:flex;flex-wrap:wrap;gap:8px;padding-top:28px;border-top:1px solid var(--dim);}
+.slide-tech-tag{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--dim);border:1px solid var(--dimmer);background:#111110;padding:4px 10px;}
+.pres-sidebar{flex:0 0 200px;border-left:1px solid var(--dim);overflow-y:auto;background:var(--dimmer);padding:12px;display:flex;flex-direction:column;gap:8px;}
+.pres-thumb{cursor:pointer;border:1px solid transparent;overflow:hidden;transition:border-color 0.25s;flex-shrink:0;}
+.pres-thumb.active{border-color:var(--white);}
+.pres-thumb:hover{border-color:var(--mid);}
+.pres-thumb img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;filter:grayscale(30%);}
+.pres-thumb-label{padding:6px 10px;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pres-controls{flex:0 0 72px;border-top:1px solid var(--dim);display:flex;align-items:center;justify-content:center;}
+.pres-btn{width:72px;height:72px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;background:none;color:var(--mid);font-size:18px;transition:color 0.25s,background 0.25s;border-right:1px solid var(--dim);}
+.pres-btn:last-child{border-right:none;}
+.pres-btn:hover{color:var(--white);background:#111110;}
+.pres-btn:disabled{opacity:0.2;cursor:default;}
+.pres-progress{flex:1;height:2px;background:var(--dim);margin:0 32px;position:relative;}
+.pres-progress-fill{height:100%;background:var(--white);transition:width 0.4s ease;}
+.pres-hint{position:absolute;bottom:80px;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--dim);transition:opacity 0.5s;pointer-events:none;}
+
+/* ── FOOTER ── */
+footer{position:relative;z-index:10;background:var(--bg);padding:80px 48px 48px;border-top:1px solid var(--dim);display:flex;justify-content:space-between;align-items:flex-end;}
+.footer-mark{font-family:'Space Grotesk',sans-serif;font-size:clamp(48px,7vw,96px);font-weight:300;color:transparent;-webkit-text-stroke:1px var(--dim);letter-spacing:-0.03em;line-height:1;}
+.footer-links{display:flex;gap:24px;}
+.footer-links a{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color 0.3s;cursor:pointer;}
+.footer-links a:hover{color:var(--white);}
+
+/* ── KEYFRAMES ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@keyframes scrollPulse{0%,100%{opacity:0.3;transform:scaleY(1);}50%{opacity:1;transform:scaleY(1.2);}}
+</style>
+</head>
+<body>
+
+<!-- ── CANVAS (home bg) ── -->
+<canvas id="hero-canvas"></canvas>
+
+<!-- ── NAV ── -->
+<nav id="nav">
+  <div class="nav-logo">Studio / CT</div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a data-page="home" class="active">Home</a></li>
+      <li><a data-page="work">Work</a></li>
+      <li><a data-page="home">Capabilities</a></li>
+      <li><a data-page="home">Contact</a></li>
+    </ul>
+    <div class="present-toggle" id="presentToggle">
+      <div class="toggle-dot"></div>
+      Present
+    </div>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════
+     HOME PAGE
+════════════════════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <div class="hero">
+    <p class="hero-eyebrow">Creative Technology — AI Native</p>
+    <h1 class="hero-headline">We build<br><em>what doesn't</em><br>exist yet.</h1>
+    <p class="hero-sub">A team of designers, engineers, and builders operating at the intersection of AI, craft, and shipping real product.</p>
+    <div class="hero-cta-row">
+      <span class="cta-primary" data-page="work">View Work</span>
+      <span class="cta-secondary">Our Approach</span>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+
+  <div class="ticker-wrap">
+    <div class="ticker-track" id="ticker"></div>
+  </div>
+
+  <section class="about">
+    <div>
+      <p class="about-label">/ Studio</p>
+      <h2 class="about-statement">Design and engineering aren't separate disciplines. They never were.</h2>
+    </div>
+    <div class="about-body">
+      <p>We're a creative technologist team embedded in the leading edge — using AI as raw material, not a shortcut. Our work lives where visual craft meets systems thinking, where a prototype ships as a product.</p>
+      <p>We move fast because our tools move fast. We ship quality because we've earned the judgment to know what it looks like.</p>
+    </div>
+  </section>
+
+  <section class="capabilities">
+    <div class="cap-header">
+      <span class="section-label">/ Capabilities</span>
+      <span class="cap-count">06 disciplines</span>
+    </div>
+    <div class="cap-list">
+      <div class="cap-item"><p class="cap-num">01</p><h3 class="cap-title">AI-Native Engineering</h3><p class="cap-desc">LLM integration, agent architecture, and production AI tooling built with real operational discipline.</p></div>
+      <div class="cap-item"><p class="cap-num">02</p><h3 class="cap-title">Creative Development</h3><p class="cap-desc">Three.js, GSAP, generative systems — visual engineering that earns its complexity.</p></div>
+      <div class="cap-item"><p class="cap-num">03</p><h3 class="cap-title">Design Systems</h3><p class="cap-desc">Component architecture, token infrastructure, and the governance that makes them last at scale.</p></div>
+      <div class="cap-item"><p class="cap-num">04</p><h3 class="cap-title">Rapid Prototyping</h3><p class="cap-desc">From concept to functional artifact in days. We prototype to learn, not to perform.</p></div>
+      <div class="cap-item"><p class="cap-num">05</p><h3 class="cap-title">UX Research & Strategy</h3><p class="cap-desc">Evidence-grounded decisions. We find the problem before we fall in love with the solution.</p></div>
+      <div class="cap-item"><p class="cap-num">06</p><h3 class="cap-title">Platform & Tooling</h3><p class="cap-desc">We build the tools that help teams build better — internal, external, and everything in between.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-mark">CT/</div>
+    <div class="footer-links">
+      <a data-page="work">Work</a>
+      <a>Capabilities</a>
+      <a>Contact</a>
+    </div>
+  </footer>
+
+</div><!-- /page-home -->
+
+<!-- ════════════════════════════════════════
+     WORK PAGE
+════════════════════════════════════════ -->
+<div class="page" id="page-work">
+
+  <header class="page-header">
+    <h1 class="page-title">Work</h1>
+    <div class="page-meta">
+      <p class="page-meta-label">Projects</p>
+      <p class="page-meta-count">06</p>
+    </div>
+  </header>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="ai">AI Tooling</button>
+    <button class="filter-btn" data-filter="creative">Creative Dev</button>
+    <button class="filter-btn" data-filter="platform">Platform</button>
+    <button class="filter-btn" data-filter="research">Research</button>
+  </div>
+
+  <main class="work-grid" id="workGrid"></main>
+
+  <footer>
+    <div class="footer-mark">CT/</div>
+    <div class="footer-links">
+      <a data-page="home">Home</a>
+      <a>Capabilities</a>
+      <a>Contact</a>
+    </div>
+  </footer>
+
+</div><!-- /page-work -->
+
+<!-- ── PRESENTATION OVERLAY ── -->
+<div class="pres-overlay" id="presOverlay">
+  <div class="pres-bar">
+    <div class="pres-brand">Studio / CT — Work</div>
+    <div class="pres-counter"><span id="presCurrentLabel">01</span> / <span id="presTotalLabel">06</span></div>
+    <button class="pres-close" id="presClose">✕ Exit Presentation</button>
+  </div>
+  <div class="pres-stage">
+    <div class="pres-slides" id="presSlides"></div>
+    <div class="pres-sidebar" id="presSidebar"></div>
+  </div>
+  <div class="pres-controls">
+    <button class="pres-btn" id="presPrev">&#8592;</button>
+    <div class="pres-progress"><div class="pres-progress-fill" id="presProgressFill"></div></div>
+    <button class="pres-btn" id="presNext">&#8594;</button>
+  </div>
+  <div class="pres-hint" id="presHint">Use ← → arrow keys to navigate</div>
+</div>
+
+<script>
+// ── PAGE ROUTING ─────────────────────────────────────────────────────────────
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.toggle('active', a.dataset.page === name);
+  });
+  // show present toggle only on work page
+  const pt = document.getElementById('presentToggle');
+  pt.classList.toggle('visible', name === 'work');
+  // canvas only makes sense on home
+  document.getElementById('hero-canvas').style.display = name === 'home' ? '' : 'none';
+  window.scrollTo(0, 0);
+}
+
+// Wire all [data-page] links
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-page]');
+  if (el && el.dataset.page) showPage(el.dataset.page);
+});
+
+// ── NAV SCROLL ────────────────────────────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// ── THREE.JS GLASS CUBE ───────────────────────────────────────────────────────
+const canvas = document.getElementById('hero-canvas');
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.2;
+
+const scene  = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+camera.position.set(0, 0, 6);
+
+const ambient = new THREE.AmbientLight(0xffffff, 0.3); scene.add(ambient);
+const key = new THREE.DirectionalLight(0xffffff, 3); key.position.set(3,5,4); scene.add(key);
+const rim = new THREE.DirectionalLight(0xcccccc, 1.5); rim.position.set(-4,1,-3); scene.add(rim);
+const fill = new THREE.PointLight(0xffffff, 1, 20); fill.position.set(0,-3,3); scene.add(fill);
+
+const cubeRenderTarget = new THREE.WebGLCubeRenderTarget(128,{
+  format:THREE.RGBFormat, generateMipmaps:true, minFilter:THREE.LinearMipmapLinearFilter
+});
+const cubeCamera = new THREE.CubeCamera(0.1, 100, cubeRenderTarget);
+scene.add(cubeCamera);
+
+const geo = new THREE.BoxGeometry(2,2,2);
+const glassMat = new THREE.MeshPhysicalMaterial({
+  color:0xffffff, metalness:0.1, roughness:0.0, reflectivity:1.0,
+  envMap:cubeRenderTarget.texture, envMapIntensity:3.0,
+  clearcoat:1.0, clearcoatRoughness:0.0,
+  transparent:true, opacity:0.18, side:THREE.DoubleSide
+});
+const cube = new THREE.Mesh(geo, glassMat);
+cube.position.set(2.8, 0.2, 0);
+scene.add(cube);
+
+const edgesGeo = new THREE.EdgesGeometry(geo);
+const edgesMat = new THREE.LineBasicMaterial({color:0xffffff, opacity:0.12, transparent:true});
+cube.add(new THREE.LineSegments(edgesGeo, edgesMat));
+
+const partCount = 180;
+const partGeo = new THREE.BufferGeometry();
+const positions = new Float32Array(partCount * 3);
+const partSpeeds = [];
+for (let i=0; i<partCount; i++) {
+  positions[i*3]   = (Math.random()-0.5)*14;
+  positions[i*3+1] = (Math.random()-0.5)*14;
+  positions[i*3+2] = (Math.random()-0.5)*6-2;
+  partSpeeds.push({x:(Math.random()-0.5)*0.002, y:(Math.random()-0.5)*0.002});
+}
+partGeo.setAttribute('position', new THREE.BufferAttribute(positions,3));
+const partMat = new THREE.PointsMaterial({color:0xffffff,size:0.018,transparent:true,opacity:0.35,sizeAttenuation:true});
+const particles = new THREE.Points(partGeo, partMat);
+scene.add(particles);
+
+let mouseX=0, mouseY=0, targetX=0, targetY=0;
+document.addEventListener('mousemove', e => {
+  mouseX = (e.clientX/window.innerWidth - 0.5)*2;
+  mouseY = -(e.clientY/window.innerHeight - 0.5)*2;
+});
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth/window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+let time=0;
+const clock = new THREE.Clock();
+(function animate() {
+  requestAnimationFrame(animate);
+  const delta = clock.getDelta(); time += delta;
+  targetX += (mouseX-targetX)*0.04;
+  targetY += (mouseY-targetY)*0.04;
+  cube.rotation.x = time*0.14 + targetY*0.4;
+  cube.rotation.y = time*0.22 + targetX*0.6;
+  cube.position.y = 0.2 + Math.sin(time*0.6)*0.15;
+  const pos = particles.geometry.attributes.position.array;
+  for (let i=0; i<partCount; i++) {
+    pos[i*3]   += partSpeeds[i].x;
+    pos[i*3+1] += partSpeeds[i].y;
+    if (Math.abs(pos[i*3])   > 7) partSpeeds[i].x *= -1;
+    if (Math.abs(pos[i*3+1]) > 7) partSpeeds[i].y *= -1;
+  }
+  particles.geometry.attributes.position.needsUpdate = true;
+  particles.rotation.y = time*0.03;
+  camera.position.x += (targetX*0.3 - camera.position.x)*0.02;
+  camera.position.y += (targetY*0.2 - camera.position.y)*0.02;
+  camera.lookAt(scene.position);
+  cube.visible = false;
+  cubeCamera.position.copy(cube.position);
+  cubeCamera.update(renderer, scene);
+  cube.visible = true;
+  renderer.render(scene, camera);
+})();
+
+// ── TICKER ────────────────────────────────────────────────────────────────────
+const tickItems = ['AI-Native Engineering','·','Creative Development','·','Design Systems','·','Rapid Prototyping','·','LLM Integration','·','Agent Architecture','·','Three.js / WebGL','·','Platform Tooling','·','UX Research','·','Component Systems','·'];
+const track = document.getElementById('ticker');
+[...tickItems,...tickItems,...tickItems,...tickItems].forEach(t => {
+  const el = document.createElement('span');
+  el.className = t==='·' ? 'ticker-item' : 'ticker-item';
+  el.textContent = t;
+  track.appendChild(el);
+});
+
+// ── WORK DATA ─────────────────────────────────────────────────────────────────
+const works = [
+  {id:1,filter:'ai',year:'2024',tag:'AI Tooling',title:'Intelligent Document Processing Pipeline',desc:'An agentic pipeline that extracts, classifies, and acts on unstructured content at enterprise scale. Built on a multi-step LLM architecture with human-in-the-loop review surfaces embedded directly into the workflow.',details:[{label:'Client',val:'Fortune 500 — Financial Services'},{label:'Timeline',val:'14 weeks'},{label:'Role',val:'Architecture + UX Lead'}],tech:['Claude API','LangGraph','React','Node.js','PostgreSQL'],img:'https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80&auto=format&fit=crop'},
+  {id:2,filter:'creative',year:'2024',tag:'Creative Development',title:'Generative Design System at Scale',desc:'A token-driven component system that uses AI to generate on-brand, WCAG-compliant design variations. Reduced time-to-theme from three weeks to under two hours for a team of forty-plus engineers.',details:[{label:'Client',val:'B2B SaaS Platform'},{label:'Timeline',val:'20 weeks'},{label:'Role',val:'Design System Architect'}],tech:['Figma API','Style Dictionary','Storybook','GPT-4o','CI/CD'],img:'https://images.unsplash.com/photo-1558655146-d09347e92766?w=900&q=80&auto=format&fit=crop'},
+  {id:3,filter:'platform',year:'2024',tag:'Platform',title:'Internal AI Co-pilot',desc:'A team-facing assistant trained on institutional knowledge — SOPs, past projects, and internal tooling documentation. Shipped from zero to production in six weeks, now used daily by over two hundred staff.',details:[{label:'Client',val:'Internal / WWT'},{label:'Timeline',val:'6 weeks'},{label:'Role',val:'Full-Stack + Prompt Engineering'}],tech:['Claude','RAG','Pinecone','Next.js','AWS'],img:'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=900&q=80&auto=format&fit=crop'},
+  {id:4,filter:'research',year:'2023',tag:'Research + Prototyping',title:'Behavioral UX Research Framework',desc:'A research-to-prototype system compressing three weeks of synthesis into repeatable two-day sprint artifacts. Includes AI-assisted affinity mapping, insight generation, and auto-generated prototype scaffolding.',details:[{label:'Client',val:'Healthcare SaaS'},{label:'Timeline',val:'8 weeks'},{label:'Role',val:'UX Research Lead'}],tech:['Dovetail','Claude API','Figma','GSAP','Notion'],img:'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=900&q=80&auto=format&fit=crop'},
+  {id:5,filter:'creative',year:'2024',tag:'Creative Development',title:'Real-Time Data Visualization Suite',desc:'A WebGL-based dashboard for live operational telemetry. Three.js powers the primary 3D network graph; D3 handles supplementary time-series rendering. Sub-100ms render latency on datasets exceeding 50k nodes.',details:[{label:'Client',val:'Telecom / Network Ops'},{label:'Timeline',val:'12 weeks'},{label:'Role',val:'Creative Technologist'}],tech:['Three.js','D3.js','WebSockets','React','InfluxDB'],img:'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=80&auto=format&fit=crop'},
+  {id:6,filter:'ai',year:'2025',tag:'AI Tooling',title:'Multimodal Content Intelligence',desc:'An end-to-end pipeline ingesting video, audio, and document assets — transcribing, summarizing, and surfacing semantic search across a library of ten thousand-plus assets with sub-second retrieval.',details:[{label:'Client',val:'Media & Entertainment'},{label:'Timeline',val:'18 weeks'},{label:'Role',val:'AI Engineering + UX'}],tech:['Whisper','Claude','FAISS','FastAPI','React','S3'],img:'https://images.unsplash.com/photo-1535303311164-664fc9ec6532?w=900&q=80&auto=format&fit=crop'},
+];
+
+// ── BUILD WORK GRID ───────────────────────────────────────────────────────────
+const grid = document.getElementById('workGrid');
+works.forEach((w, i) => {
+  const card = document.createElement('div');
+  card.className = 'work-card';
+  card.dataset.filter = w.filter;
+  card.style.animationDelay = `${i*0.1}s`;
+  card.innerHTML = `
+    <div class="card-thumb">
+      <img src="${w.img}" alt="${w.title}" loading="lazy"/>
+      <div class="card-thumb-overlay"></div>
+    </div>
+    <div class="card-body">
+      <div class="card-top"><span class="card-tag">${w.tag}</span><span class="card-year">${w.year}</span></div>
+      <h2 class="card-title">${w.title}</h2>
+      <p class="card-desc">${w.desc.slice(0,120)}…</p>
+    </div>
+    <span class="card-arrow">↗</span>`;
+  card.addEventListener('click', () => openPresentation(i));
+  grid.appendChild(card);
+});
+
+// ── FILTERS ───────────────────────────────────────────────────────────────────
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    document.querySelectorAll('.work-card').forEach(c => {
+      c.style.display = (f==='all' || c.dataset.filter===f) ? '' : 'none';
+    });
+  });
+});
+
+// ── BUILD PRESENTATION ────────────────────────────────────────────────────────
+let currentSlide = -1;
+const totalSlides = works.length;
+const slidesEl   = document.getElementById('presSlides');
+const sidebarEl  = document.getElementById('presSidebar');
+const currentLabel = document.getElementById('presCurrentLabel');
+const totalLabel   = document.getElementById('presTotalLabel');
+const progressFill = document.getElementById('presProgressFill');
+const prevBtn = document.getElementById('presPrev');
+const nextBtn = document.getElementById('presNext');
+const presHint = document.getElementById('presHint');
+
+works.forEach((w, i) => {
+  const slide = document.createElement('div');
+  slide.className = 'pres-slide';
+  slide.innerHTML = `
+    <div class="slide-visual"><img src="${w.img}" alt="${w.title}"/><div class="slide-visual-overlay"></div></div>
+    <div class="slide-content">
+      <div>
+        <p class="slide-eyebrow">Project ${String(i+1).padStart(2,'0')} / ${String(totalSlides).padStart(2,'0')}</p>
+        <span class="slide-tag">${w.tag}</span>
+        <h2 class="slide-title">${w.title}</h2>
+        <p class="slide-desc">${w.desc}</p>
+        <div class="slide-details">${w.details.map(d=>`<div class="slide-detail-row"><span class="slide-detail-label">${d.label}</span><span class="slide-detail-val">${d.val}</span></div>`).join('')}</div>
+      </div>
+      <div class="slide-tech">${w.tech.map(t=>`<span class="slide-tech-tag">${t}</span>`).join('')}</div>
+    </div>`;
+  slidesEl.appendChild(slide);
+
+  const thumb = document.createElement('div');
+  thumb.className = 'pres-thumb';
+  thumb.innerHTML = `<img src="${w.img}" alt="${w.title}"/><div class="pres-thumb-label">${w.title}</div>`;
+  thumb.addEventListener('click', () => goToSlide(i));
+  sidebarEl.appendChild(thumb);
+});
+
+totalLabel.textContent = String(totalSlides).padStart(2,'0');
+
+function goToSlide(idx) {
+  const slides = slidesEl.querySelectorAll('.pres-slide');
+  const thumbs = sidebarEl.querySelectorAll('.pres-thumb');
+  if (currentSlide >= 0 && slides[currentSlide]) {
+    const leaving = slides[currentSlide];
+    leaving.classList.remove('active');
+    leaving.classList.add('prev');
+    setTimeout(() => leaving.classList.remove('prev'), 600);
+  }
+  currentSlide = Math.max(0, Math.min(idx, totalSlides-1));
+  slides[currentSlide].classList.add('active');
+  thumbs.forEach((t,i) => t.classList.toggle('active', i===currentSlide));
+  thumbs[currentSlide].scrollIntoView({behavior:'smooth',block:'nearest'});
+  currentLabel.textContent = String(currentSlide+1).padStart(2,'0');
+  progressFill.style.width = `${((currentSlide+1)/totalSlides)*100}%`;
+  prevBtn.disabled = currentSlide===0;
+  nextBtn.disabled = currentSlide===totalSlides-1;
+}
+
+function openPresentation(startIdx=0) {
+  document.body.classList.add('present-mode');
+  document.getElementById('presentToggle').classList.add('active');
+  currentSlide = -1;
+  goToSlide(startIdx);
+  setTimeout(() => { presHint.style.opacity='0'; }, 4000);
+}
+
+function closePresentation() {
+  document.body.classList.remove('present-mode');
+  document.getElementById('presentToggle').classList.remove('active');
+  presHint.style.opacity='1';
+}
+
+document.getElementById('presentToggle').addEventListener('click', () => {
+  document.body.classList.contains('present-mode') ? closePresentation() : openPresentation(0);
+});
+document.getElementById('presClose').addEventListener('click', closePresentation);
+prevBtn.addEventListener('click', () => goToSlide(currentSlide-1));
+nextBtn.addEventListener('click', () => goToSlide(currentSlide+1));
+document.addEventListener('keydown', e => {
+  if (!document.body.classList.contains('present-mode')) return;
+  if (e.key==='ArrowRight'||e.key==='ArrowDown') goToSlide(currentSlide+1);
+  if (e.key==='ArrowLeft' ||e.key==='ArrowUp')   goToSlide(currentSlide-1);
+  if (e.key==='Escape') closePresentation();
+});
+</script>
+</body>
+</html>
