@@ -1,0 +1,81 @@
+/* CONTACT.CSS — Contact Section (Technical) */
+
+.contact {
+  border-top: 1px solid var(--color-rule);
+  padding: clamp(3rem, 6vw, 5rem) var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+  flex-wrap: wrap;
+  background: linear-gradient(135deg, #0A0E27 0%, #1A1F3A 100%);
+}
+
+.contact-headline {
+  font-family: var(--font-mono);
+  font-size: var(--text-contact-h);
+  font-weight: 400;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-ink);
+  line-height: 1.15;
+}
+
+.contact-headline em {
+  font-family: var(--font-mono);
+  font-style: normal;
+  color: var(--color-accent);
+  text-shadow: 0 0 15px var(--color-accent);
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0.875rem 1.75rem;
+  background: var(--color-accent);
+  color: var(--color-bg);
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+  font-weight: 500;
+  letter-spacing: var(--tracking-normal);
+  text-decoration: none;
+  border: 1px solid var(--color-accent-2);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s var(--ease-expo);
+  box-shadow: 0 0 15px var(--color-accent);
+}
+
+.cta-btn:hover {
+  background: var(--color-accent-2);
+  box-shadow: 0 0 30px var(--color-accent-2);
+  transform: translateY(-2px);
+}
+
+.cta-arrow {
+  display: inline-block;
+  transition: transform 0.2s var(--ease-expo);
+}
+
+.cta-btn:hover .cta-arrow {
+  transform: translate(3px, -3px);
+}
+
+.footer {
+  padding: var(--space-6) var(--gutter);
+  border-top: 1px solid var(--color-rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  background: #0A0E27;
+}
+
+.footer-copy {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-ink-3);
+  text-transform: uppercase;
+}

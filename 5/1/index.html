@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Creative Technology — WWTd. We make the complex inevitable." />
+  <title>Creative Technology — WWTd</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet" />
+
+  <!-- Styles — order matters: tokens first, then base, then components -->
+  <link rel="stylesheet" href="assets/css/tokens.css" />
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/animations.css" />
+  <link rel="stylesheet" href="assets/css/nav.css" />
+  <link rel="stylesheet" href="assets/css/hero.css" />
+  <link rel="stylesheet" href="assets/css/work.css" />
+  <link rel="stylesheet" href="assets/css/about.css" />
+  <link rel="stylesheet" href="assets/css/contact.css" />
+</head>
+<body>
+
+  <div class="grain" aria-hidden="true"></div>
+
+  <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+    <a class="nav-logo" href="/">Creative Technology</a>
+    <ul class="nav-links hide-mobile">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" aria-pressed="false"></button>
+    </div>
+  </nav>
+
+  <section class="hero" aria-label="Introduction">
+    <div class="hero-body">
+      <p class="hero-eyebrow anim-fade-up anim-delay-1">Creative Technology — WWTd</p>
+      <h1 class="hero-headline" aria-label="We make the complex inevitable">
+        <span class="line anim-slide-up"><span class="line-inner anim-delay-2">We make the</span></span>
+        <span class="line anim-slide-up"><span class="line-inner anim-delay-3"><em>complex</em></span></span>
+        <span class="line anim-slide-up"><span class="line-inner anim-delay-4">inevitable.</span></span>
+      </h1>
+      <p class="hero-desc anim-fade-up anim-delay-5">
+        A team at the intersection of design, engineering, and emerging technology —
+        translating ambiguity into tools, systems, and experiences that move organizations forward.
+      </p>
+      <div class="transform-strip anim-fade-up anim-delay-6">
+        <span class="strip-label">We translate</span>
+        <div class="transform-items">
+          <div class="t-item">
+            <span class="t-word from">fuzzy ideas</span>
+            <span class="t-arrow" aria-hidden="true">→</span>
+            <span class="t-word to" data-transform-to="0">working tools</span>
+          </div>
+          <div class="t-sep" aria-hidden="true"></div>
+          <div class="t-item">
+            <span class="t-word from">raw data</span>
+            <span class="t-arrow" aria-hidden="true">→</span>
+            <span class="t-word to" data-transform-to="1">clear signal</span>
+          </div>
+          <div class="t-sep" aria-hidden="true"></div>
+          <div class="t-item">
+            <span class="t-word from">language</span>
+            <span class="t-arrow" aria-hidden="true">→</span>
+            <span class="t-word to" data-transform-to="2">living systems</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-footer anim-fade-up anim-delay-7" aria-hidden="true">
+      <div class="scroll-line"></div>
+      <span class="scroll-label">Scroll to explore</span>
+    </div>
+  </section>
+
+  <section id="work" class="section" aria-label="Selected work">
+    <div class="section-header">
+      <span class="section-title">Selected Work</span>
+      <span class="section-count">04 projects</span>
+    </div>
+    <div class="work-grid">
+
+      <article class="work-card reveal" aria-label="Agentic Tools Radar project">
+        <div class="work-card-top">
+          <span class="work-tag">AI Tooling</span>
+          <span class="work-arrow" aria-hidden="true">↗</span>
+        </div>
+        <div class="mock-window" aria-hidden="true">
+          <div class="mock-titlebar">
+            <div class="mock-dot mock-dot-red"></div><div class="mock-dot mock-dot-yellow"></div><div class="mock-dot mock-dot-green"></div>
+            <span class="mock-url">agentic-tools-radar</span>
+          </div>
+          <div class="mock-body">
+            <div class="mock-radar">
+              <div class="radar-rings">
+                <svg viewBox="0 0 300 130" preserveAspectRatio="xMidYMid meet">
+                  <circle cx="150" cy="65" r="55" fill="none" stroke="rgba(26,25,22,0.07)" stroke-width="1"/>
+                  <circle cx="150" cy="65" r="37" fill="none" stroke="rgba(26,25,22,0.07)" stroke-width="1"/>
+                  <circle cx="150" cy="65" r="19" fill="none" stroke="rgba(26,25,22,0.07)" stroke-width="1"/>
+                  <line x1="95" y1="65" x2="205" y2="65" stroke="rgba(26,25,22,0.05)" stroke-width="1"/>
+                  <line x1="150" y1="10" x2="150" y2="120" stroke="rgba(26,25,22,0.05)" stroke-width="1"/>
+                  <text x="155" y="20" font-family="DM Mono" font-size="6" fill="rgba(26,25,22,0.3)" letter-spacing="1">ADOPT</text>
+                  <text x="155" y="48" font-family="DM Mono" font-size="6" fill="rgba(26,25,22,0.3)" letter-spacing="1">TRIAL</text>
+                  <text x="155" y="82" font-family="DM Mono" font-size="6" fill="rgba(26,25,22,0.3)" letter-spacing="1">ASSESS</text>
+                  <text x="155" y="115" font-family="DM Mono" font-size="6" fill="rgba(26,25,22,0.3)" letter-spacing="1">HOLD</text>
+                  <circle cx="160" cy="28" r="4" fill="#C84B2F" opacity="0.9"/>
+                  <circle cx="145" cy="44" r="3.5" fill="#C84B2F" opacity="0.7"/>
+                  <circle cx="172" cy="40" r="3" fill="#C84B2F" opacity="0.6"/>
+                  <circle cx="155" cy="57" r="3.5" fill="#4B8BDE" opacity="0.8"/>
+                  <circle cx="168" cy="51" r="3" fill="#4B8BDE" opacity="0.6"/>
+                  <circle cx="140" cy="65" r="4" fill="#6B6860" opacity="0.5"/>
+                  <circle cx="175" cy="74" r="3" fill="#6B6860" opacity="0.4"/>
+                  <circle cx="152" cy="88" r="3.5" fill="#6B6860" opacity="0.35"/>
+                </svg>
+              </div>
+              <div class="radar-legend">
+                <div class="radar-legend-item"><div class="radar-legend-dot" style="background:#C84B2F"></div>Cursor</div>
+                <div class="radar-legend-item"><div class="radar-legend-dot" style="background:#4B8BDE"></div>Windsurf</div>
+                <div class="radar-legend-item"><div class="radar-legend-dot" style="background:#6B6860"></div>Copilot</div>
+                <div class="radar-legend-item"><div class="radar-legend-dot" style="background:#28CA42"></div>Claude Code</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="work-info">
+          <div class="work-transform"><span class="wt-from">tool sprawl</span><span class="wt-arrow">→</span><span class="wt-to">clear signal</span></div>
+          <h3 class="work-name">Agentic Tools Radar</h3>
+          <p class="work-desc">An interactive radar for evaluating and tracking agentic AI developer tools — with comparison views, multi-format exports, and automated Slack notifications for the team.</p>
+        </div>
+      </article>
+
+      <article class="work-card reveal reveal-delay-1" aria-label="VibeTanks project">
+        <div class="work-card-top">
+          <span class="work-tag">AI Game</span>
+          <span class="work-arrow" aria-hidden="true">↗</span>
+        </div>
+        <div class="mock-window" aria-hidden="true">
+          <div class="mock-titlebar">
+            <div class="mock-dot mock-dot-red"></div><div class="mock-dot mock-dot-yellow"></div><div class="mock-dot mock-dot-green"></div>
+            <span class="mock-url">vibetanks.app</span>
+          </div>
+          <div class="mock-body" style="padding:0;overflow:hidden;">
+            <div class="mock-tanks-body">
+              <div class="tank-arena">
+                <div class="tank-body tank-a"></div>
+                <span class="tank-vs">VS</span>
+                <div class="tank-body tank-b"></div>
+              </div>
+              <div class="tank-chat">
+                <span class="tank-chat-label">prompt: </span><span class="tank-chat-accent">"heavily armored, slow but devastating"</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="work-info">
+          <div class="work-transform"><span class="wt-from">natural language</span><span class="wt-arrow">→</span><span class="wt-to">living system</span></div>
+          <h3 class="work-name">VibeTanks</h3>
+          <p class="work-desc">Describe your tank in plain language. AI generates its stats and behavior script. Then watch it fight. A live proof-of-concept for natural language as a design input.</p>
+        </div>
+      </article>
+
+      <article class="work-card reveal reveal-delay-2" aria-label="FTE Estimate App project">
+        <div class="work-card-top">
+          <span class="work-tag">Productivity</span>
+          <span class="work-arrow" aria-hidden="true">↗</span>
+        </div>
+        <div class="mock-window" aria-hidden="true">
+          <div class="mock-titlebar">
+            <div class="mock-dot mock-dot-red"></div><div class="mock-dot mock-dot-yellow"></div><div class="mock-dot mock-dot-green"></div>
+            <span class="mock-url">fte-estimator</span>
+          </div>
+          <div class="mock-body">
+            <div class="mock-fte">
+              <div class="fte-row">
+                <div class="fte-cell fte-cell-header">Role</div><div class="fte-cell fte-cell-header">Hours</div><div class="fte-cell fte-cell-header">Rate</div><div class="fte-cell fte-cell-header">FTE</div>
+              </div>
+              <div class="fte-row"><div class="fte-cell">Sr. Designer</div><div class="fte-cell">320h</div><div class="fte-cell">$145</div><div class="fte-cell fte-cell-accent">1.6</div></div>
+              <div class="fte-row"><div class="fte-cell">Dev Lead</div><div class="fte-cell">480h</div><div class="fte-cell">$165</div><div class="fte-cell fte-cell-accent">2.4</div></div>
+              <div class="fte-row"><div class="fte-cell">Strategist</div><div class="fte-cell">160h</div><div class="fte-cell">$130</div><div class="fte-cell fte-cell-accent">0.8</div></div>
+              <div class="fte-total"><span class="fte-total-label">Total Estimate</span><span class="fte-total-value">4.8 FTE</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="work-info">
+          <div class="work-transform"><span class="wt-from">ambiguity</span><span class="wt-arrow">→</span><span class="wt-to">concrete number</span></div>
+          <h3 class="work-name">FTE Estimate App</h3>
+          <p class="work-desc">A modern estimation tool built on Next.js 15 — turning the messy, negotiated work of project scoping into a structured, database-backed record.</p>
+        </div>
+      </article>
+
+      <article class="work-card reveal reveal-delay-3" aria-label="Special Olympics Awards project">
+        <div class="work-card-top">
+          <span class="work-tag">Experience</span>
+          <span class="work-arrow" aria-hidden="true">↗</span>
+        </div>
+        <div class="mock-window" aria-hidden="true">
+          <div class="mock-titlebar">
+            <div class="mock-dot mock-dot-red"></div><div class="mock-dot mock-dot-yellow"></div><div class="mock-dot mock-dot-green"></div>
+            <span class="mock-url">specialolympics-awards</span>
+          </div>
+          <div class="mock-body" style="padding:0;">
+            <div class="mock-so">
+              <div class="so-torch" aria-hidden="true">🔥</div>
+              <div class="so-title">Celebrating<br/>Achievement</div>
+              <div class="so-badge">Special Olympics 2025 Awards</div>
+            </div>
+          </div>
+        </div>
+        <div class="work-info">
+          <div class="work-transform"><span class="wt-from">recognition</span><span class="wt-arrow">→</span><span class="wt-to">lasting moment</span></div>
+          <h3 class="work-name">Special Olympics Awards</h3>
+          <p class="work-desc">A digital awards experience designed to honor athletes with the visual weight their achievement deserves — proving that meaningful work doesn't require a large brief.</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="about" class="section" aria-label="About the team">
+    <div class="section-header">
+      <span class="section-title">The Team</span>
+    </div>
+    <div class="about-grid">
+      <h2 class="about-headline reveal">Every discipline.<br/>One <em>direction.</em></h2>
+      <div class="about-body reveal reveal-delay-1">
+        <p>Creative Technology sits at the intersection of every silo in the organization — borrowing the best of design, engineering, strategy, and production to bridge the gaps none of them can cross alone.</p>
+        <p>We exist to forge a clear path to the plausible future: building the tools, systems, and experiences that move the organization from where it is to where it needs to be.</p>
+        <div class="capability-list">
+          <div class="cap-item"><span class="cap-dash">—</span>AI &amp; Agentic Systems</div>
+          <div class="cap-item"><span class="cap-dash">—</span>Design Systems</div>
+          <div class="cap-item"><span class="cap-dash">—</span>Rapid Prototyping</div>
+          <div class="cap-item"><span class="cap-dash">—</span>Full-stack Development</div>
+          <div class="cap-item"><span class="cap-dash">—</span>Experience Design</div>
+          <div class="cap-item"><span class="cap-dash">—</span>Creative Tooling</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="contact" class="contact" role="contentinfo">
+    <div class="contact-headline reveal">Let's make something<br/><em>inevitable.</em></div>
+    <a href="mailto:creativetechnology@example.com" class="cta-btn reveal reveal-delay-1">
+      Start a conversation <span class="cta-arrow" aria-hidden="true">↗</span>
+    </a>
+  </div>
+
+  <footer class="footer">
+    <span class="footer-copy">© 2025 Creative Technology — WWTd</span>
+    <span class="footer-copy">Making the complex inevitable</span>
+  </footer>
+
+  <script type="module" src="assets/js/main.js"></script>
+
+</body>
+</html>

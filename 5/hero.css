@@ -1,0 +1,139 @@
+/* HERO.CSS — Hero Section (Technical) */
+.hero {
+  min-height: 100svh;
+  padding: 0 var(--gutter);
+  padding-top: 7rem;
+  padding-bottom: var(--space-16);
+  display: grid;
+  grid-template-rows: 1fr auto;
+  position: relative;
+  border-bottom: 1px solid var(--color-rule);
+  background: linear-gradient(135deg, #0A0E27 0%, #1A1F3A 100%);
+}
+
+.hero-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 72rem;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: var(--weight-regular);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 2.5rem;
+  text-shadow: 0 0 10px var(--color-accent);
+}
+
+.hero-headline {
+  font-family: var(--font-mono);
+  font-size: var(--text-hero);
+  font-weight: 500;
+  line-height: var(--leading-tight);
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+  margin-bottom: 2.5rem;
+}
+
+.hero-headline .line {
+  display: block;
+  overflow: hidden;
+}
+
+.hero-headline .line-inner {
+  display: block;
+  transform: translateY(110%);
+}
+
+.hero-headline em {
+  font-family: var(--font-mono);
+  font-style: normal;
+  color: var(--color-accent);
+  text-shadow: 0 0 20px var(--color-accent);
+}
+
+.hero-desc {
+  max-width: 38rem;
+  font-size: clamp(var(--text-md), 1.5vw, var(--text-lg));
+  font-weight: var(--weight-light);
+  color: var(--color-ink-2);
+  line-height: var(--leading-relaxed);
+  font-family: var(--font-mono);
+}
+
+.transform-strip {
+  margin-top: clamp(3rem, 6vw, 5.5rem);
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--color-rule);
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.strip-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-accent-2);
+  font-weight: 700;
+}
+
+.transform-items {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.t-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  font-family: var(--font-mono);
+  color: var(--color-ink-2);
+}
+
+.t-word {
+  color: var(--color-ink);
+}
+
+.t-arrow {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.t-sep {
+  width: 1px;
+  height: 2rem;
+  background: var(--color-rule);
+}
+
+.hero-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--color-rule);
+}
+
+.scroll-line {
+  width: 1px;
+  height: 2rem;
+  background: var(--color-accent);
+  box-shadow: 0 0 10px var(--color-accent);
+}
+
+.scroll-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-accent-2);
+}

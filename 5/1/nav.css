@@ -1,0 +1,111 @@
+/* ============================================================
+   NAV.CSS — Navigation
+   Depends on: tokens.css, base.css
+   ============================================================ */
+
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: var(--z-nav);
+  padding: var(--space-6) var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Frosted background on scroll */
+.nav::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-bg);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  z-index: -1;
+}
+
+.nav.scrolled::after {
+  opacity: 0.92;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-rule);
+}
+
+/* Logo */
+.nav-logo {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+/* Links */
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.8125rem;
+  font-weight: var(--weight-regular);
+  color: var(--color-ink-2);
+  text-decoration: none;
+  letter-spacing: var(--tracking-normal);
+  transition: color var(--transition-fast);
+}
+
+.nav-links a:hover {
+  color: var(--color-ink);
+}
+
+/* Right slot */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+/* Theme toggle */
+.theme-toggle {
+  width: 2.25rem;
+  height: 1.25rem;
+  background: var(--color-rule);
+  border-radius: var(--radius-full);
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: background var(--transition-base);
+  flex-shrink: 0;
+}
+
+.theme-toggle::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 0.875rem;
+  height: 0.875rem;
+  border-radius: 50%;
+  background: var(--color-ink);
+  transition: transform var(--transition-base), background var(--transition-base);
+}
+
+.theme-toggle.active::after {
+  transform: translateX(1rem);
+  background: #F5F3EE;
+}
+
+.theme-toggle.active {
+  background: var(--color-ink);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+}
