@@ -1,0 +1,156 @@
+/* ============================================================
+   HERO.CSS — Hero Section
+   Depends on: tokens.css, base.css, animations.css
+   ============================================================ */
+
+.hero {
+  min-height: 100svh;
+  padding: 0 var(--gutter);
+  padding-top: 7rem;
+  padding-bottom: var(--space-16);
+  display: grid;
+  grid-template-rows: 1fr auto;
+  position: relative;
+}
+
+.hero-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 72rem;
+}
+
+/* Eyebrow */
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: var(--weight-regular);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-ink-2);
+  margin-bottom: 2.5rem;
+}
+
+/* Headline */
+.hero-headline {
+  font-family: var(--font-sans);
+  font-size: var(--text-hero);
+  font-weight: var(--weight-light);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-ink);
+  margin-bottom: 2.5rem;
+}
+
+.hero-headline .line {
+  display: block;
+  overflow: hidden;
+}
+
+.hero-headline .line-inner {
+  display: block;
+  transform: translateY(110%);
+}
+
+.hero-headline em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: var(--weight-light);
+  color: var(--color-accent);
+}
+
+/* Description */
+.hero-desc {
+  max-width: 38rem;
+  font-size: clamp(var(--text-md), 1.5vw, var(--text-lg));
+  font-weight: var(--weight-light);
+  color: var(--color-ink-2);
+  line-height: var(--leading-relaxed);
+}
+
+/* Transform Strip */
+.transform-strip {
+  margin-top: clamp(3rem, 6vw, 5.5rem);
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--color-rule);
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.strip-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+  flex-shrink: 0;
+}
+
+.transform-items {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  row-gap: var(--space-2);
+}
+
+.t-item {
+  display: flex;
+  align-items: center;
+}
+
+.t-word {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.04em;
+}
+
+.t-word.from {
+  background: var(--color-bg-card);
+  color: var(--color-ink-2);
+  border: 1px solid var(--color-rule);
+}
+
+.t-word.to {
+  background: var(--color-accent);
+  color: #fff;
+  border: 1px solid transparent;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.t-arrow {
+  color: var(--color-ink-3);
+  padding: 0 var(--space-2);
+  font-size: var(--text-base);
+}
+
+.t-sep {
+  width: 1px;
+  height: 1.5rem;
+  background: var(--color-rule);
+  margin: 0 var(--space-4);
+}
+
+/* Scroll indicator */
+.hero-footer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.scroll-line {
+  width: 2rem;
+  height: 1px;
+  background: var(--color-ink-3);
+}
+
+.scroll-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+}
