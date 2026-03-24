@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Direction Filter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink:     #1a1612;
+  --ink2:    #4a4540;
+  --ink3:    #8a8480;
+  --paper:   #f5f0eb;
+  --paper2:  #ede8e2;
+  --rule:    #d5cfc8;
+  --accent:  #c8401a;
+  --accent2: #2a5c8a;
+  --gold:    #b8862a;
+
+  --f-display: 'Playfair Display', Georgia, serif;
+  --f-mono:    'DM Mono', 'Courier New', monospace;
+}
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: var(--ink);
+}
+
+/* ── DECK ── */
+#deck {
+  width: 100%; height: 100%;
+  position: relative;
+}
+
+/* ── SLIDE ── */
+.slide {
+  position: absolute;
+  inset: 0;
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0s;
+  overflow: hidden;
+}
+
+.slide.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.slide.entering { animation: slideIn 0.55s cubic-bezier(0.16,1,0.3,1) forwards; }
+.slide.leaving  { animation: slideOut 0.45s cubic-bezier(0.4,0,1,1) forwards; }
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideOut {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-16px); }
+}
+
+/* ── SHARED LAYOUT ── */
+.slide-inner {
+  flex: 1;
+  display: grid;
+  padding: 52px 64px 40px;
+  gap: 0;
+  position: relative;
+}
+
+/* ── RULE / ORNAMENT ── */
+.top-rule {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--ink);
+}
+.top-rule::after {
+  content: '';
+  position: absolute;
+  top: 5px; left: 0; right: 0;
+  height: 1px;
+  background: var(--rule);
+}
+
+.slide-num {
+  position: absolute;
+  top: 20px; right: 64px;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--ink3);
+}
+
+/* ── TYPOGRAPHY ── */
+.eyebrow {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+
+.slide-title {
+  font-family: var(--f-display);
+  font-size: clamp(42px, 6vw, 80px);
+  font-weight: 900;
+  line-height: 0.95;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+
+.slide-title em {
+  font-style: italic;
+  color: var(--ink2);
+}
+
+.body-text {
+  font-family: var(--f-mono);
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--ink2);
+  font-weight: 300;
+}
+
+.label {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ink3);
+}
+
+/* ── DIVIDER ── */
+.rule {
+  width: 100%;
+  height: 1px;
+  background: var(--rule);
+  margin: 20px 0;
+}
+
+.rule-short {
+  width: 40px;
+  height: 2px;
+  background: var(--accent);
+  margin: 16px 0 24px;
+}
+
+
+/* ═══════════════════════════
+   SLIDE 1 — Title / Intro
+═══════════════════════════ */
+#slide-1 .slide-inner {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr auto;
+  align-items: start;
+}
+
+.s1-head {
+  grid-column: 1 / -1;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 40px;
+}
+
+.s1-left {
+  padding-right: 60px;
+  border-right: 1px solid var(--rule);
+}
+
+.s1-right {
+  padding-left: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.s1-footer {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+
+.gap-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.gap-item .gap-label {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ink3);
+}
+.gap-item .gap-val {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.input-hint {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  color: var(--ink3);
+}
+.input-hint .pill {
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  padding: 3px 8px;
+  border-radius: 2px;
+}
+
+/* ═══════════════════════════
+   SLIDE 2 — Emotional + Motion
+═══════════════════════════ */
+#slide-2 .slide-inner {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr;
+  column-gap: 0;
+}
+
+.s2-col {
+  display: flex;
+  flex-direction: column;
+  padding-top: 8px;
+}
+
+.s2-col:first-child {
+  padding-right: 52px;
+  border-right: 1px solid var(--rule);
+}
+.s2-col:last-child {
+  padding-left: 52px;
+}
+
+.s2-head {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 36px;
+}
+
+.fill-field {
+  border: none;
+  border-bottom: 1px solid var(--rule);
+  background: transparent;
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: 17px;
+  color: var(--ink);
+  padding: 6px 0 8px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s;
+  caret-color: var(--accent);
+}
+.fill-field:focus { border-bottom-color: var(--accent); }
+.fill-field::placeholder { color: var(--rule); }
+
+.easing-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 4px;
+}
+.easing-table tr {
+  border-bottom: 1px solid var(--paper2);
+}
+.easing-table tr:last-child { border-bottom: none; }
+.easing-table td {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  padding: 8px 0;
+  color: var(--ink2);
+  vertical-align: top;
+}
+.easing-table td:first-child {
+  width: 44%;
+  color: var(--ink3);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+}
+.easing-table td:last-child {
+  font-style: italic;
+  color: var(--accent2);
+}
+
+.check-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+}
+.check-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  color: var(--ink2);
+  cursor: pointer;
+}
+.check-row input[type=checkbox] {
+  appearance: none;
+  width: 14px; height: 14px;
+  border: 1px solid var(--ink3);
+  border-radius: 1px;
+  position: relative;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.check-row input[type=checkbox]:checked {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+.check-row input[type=checkbox]:checked::after {
+  content: '✓';
+  position: absolute;
+  top: -1px; left: 2px;
+  font-size: 10px;
+  color: var(--paper);
+  font-family: var(--f-mono);
+}
+
+/* ═══════════════════════════
+   SLIDE 3 — Aesthetic Vocab
+═══════════════════════════ */
+#slide-3 .slide-inner {
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto 1fr auto;
+  column-gap: 0;
+}
+
+.s3-head {
+  grid-column: 1 / -1;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 36px;
+}
+
+.s3-col {
+  display: flex;
+  flex-direction: column;
+  padding: 0 36px;
+  border-right: 1px solid var(--rule);
+}
+.s3-col:first-child { padding-left: 0; }
+.s3-col:last-child  { padding-right: 0; border-right: none; }
+
+.vocab-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.vocab-table tr { border-bottom: 1px solid var(--paper2); }
+.vocab-table tr:last-child { border-bottom: none; }
+.vocab-table td {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  padding: 9px 0;
+  vertical-align: top;
+  line-height: 1.5;
+}
+.vocab-table td:first-child {
+  color: var(--ink3);
+  font-size: 10px;
+  width: 42%;
+  padding-right: 12px;
+}
+.vocab-table td:last-child {
+  color: var(--ink2);
+  font-style: italic;
+}
+
+.s3-footer {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+
+/* ═══════════════════════════
+   SLIDE 4 — Reference + Friction
+═══════════════════════════ */
+#slide-4 .slide-inner {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr;
+}
+
+.s4-head {
+  grid-column: 1 / -1;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 36px;
+}
+
+.s4-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.s4-col:first-child {
+  padding-right: 52px;
+  border-right: 1px solid var(--rule);
+}
+.s4-col:last-child { padding-left: 52px; }
+
+.url-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+}
+.url-label {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  white-space: nowrap;
+}
+.url-field {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: var(--f-mono);
+  font-size: 12px;
+  color: var(--accent2);
+  outline: none;
+  caret-color: var(--accent);
+}
+.url-field::placeholder { color: var(--rule); }
+
+.extract-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
+  margin-bottom: 20px;
+}
+
+.friction-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--paper2);
+}
+.friction-row:last-child { border-bottom: none; }
+
+.friction-sym {
+  font-family: var(--f-display);
+  font-size: 18px;
+  font-weight: 700;
+  width: 20px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.friction-sym.keep  { color: var(--accent2); }
+.friction-sym.cut   { color: var(--accent); }
+.friction-sym.more  { color: var(--gold); }
+.friction-sym.less  { color: var(--ink3); }
+
+.friction-field {
+  flex: 1;
+  border: none;
+  border-bottom: 1px dashed var(--rule);
+  background: transparent;
+  font-family: var(--f-mono);
+  font-size: 12px;
+  color: var(--ink);
+  outline: none;
+  padding-bottom: 2px;
+  caret-color: var(--accent);
+}
+.friction-field::placeholder { color: var(--rule); font-style: italic; }
+
+
+/* ── NAV ── */
+#nav {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  z-index: 100;
+  background: var(--ink);
+  padding: 10px 20px;
+  border-radius: 40px;
+}
+
+.nav-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--ink3);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.nav-dot.active { background: var(--paper); transform: scale(1.4); }
+
+.nav-arrow {
+  font-family: var(--f-mono);
+  font-size: 14px;
+  color: var(--ink3);
+  cursor: pointer;
+  padding: 0 4px;
+  transition: color 0.2s;
+  user-select: none;
+  background: none;
+  border: none;
+  line-height: 1;
+}
+.nav-arrow:hover { color: var(--paper); }
+.nav-arrow:disabled { opacity: 0.2; cursor: default; }
+
+.nav-label {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--ink3);
+  white-space: nowrap;
+}
+
+/* ── MISC ── */
+.accent-word { color: var(--accent); }
+.mono-sm {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  color: var(--ink3);
+  line-height: 1.7;
+}
+
+.section-lede {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--ink2);
+  line-height: 1.5;
+  max-width: 420px;
+}
+</style>
+</head>
+<body>
+
+<div id="deck">
+
+  <!-- ═══ SLIDE 1 ═══ -->
+  <div class="slide active" id="slide-1">
+    <div class="top-rule"></div>
+    <span class="slide-num">01 / 04</span>
+    <div class="slide-inner">
+
+      <div class="s1-head">
+        <div class="eyebrow">Design Communication Tool</div>
+        <h1 class="slide-title">Design<br><em>Direction</em><br>Filter</h1>
+      </div>
+
+      <div class="s1-left">
+        <p class="section-lede">A structured evaluator for communicating visual and motion intent — use alongside inspiration URLs or screenshots.</p>
+        <div class="rule-short"></div>
+        <p class="body-text">Design intent lives in the <em>felt</em> experience of a site, not its static pixels. This filter bridges that gap — giving Claude a vocabulary to work from before any code is written.</p>
+      </div>
+
+      <div class="s1-right">
+        <div class="gap-item">
+          <span class="gap-label">The core gap</span>
+          <span class="gap-val">Neither URLs nor screenshots capture choreography, easing, or physics.</span>
+        </div>
+        <div class="rule"></div>
+        <div class="gap-item">
+          <span class="gap-label">What this solves</span>
+          <span class="gap-val">Language-first direction that translates feeling into actionable design decisions.</span>
+        </div>
+        <div class="rule"></div>
+        <div class="gap-item">
+          <span class="gap-label">How to use</span>
+          <span class="gap-val">Fill in what you know. Leave the rest blank. Iteration beats a perfect brief.</span>
+        </div>
+      </div>
+
+      <div class="s1-footer">
+        <div class="input-hint">
+          <span class="pill">→</span>
+          <span>Navigate with arrow keys or click</span>
+        </div>
+        <div style="display:flex;gap:32px;">
+          <div class="label">Slides 01–04</div>
+          <div class="label">Fillable fields throughout</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ═══ SLIDE 2 ═══ -->
+  <div class="slide" id="slide-2">
+    <div class="top-rule"></div>
+    <span class="slide-num">02 / 04</span>
+    <div class="slide-inner">
+
+      <div class="s2-head">
+        <div>
+          <div class="eyebrow">Section 01 + 02</div>
+          <h2 class="slide-title" style="font-size:clamp(32px,4.5vw,58px);">Emotional Arc<br><em>& Motion</em></h2>
+        </div>
+        <p class="mono-sm" style="max-width:280px;text-align:right;">Describe how the page should <em>feel</em> to move through — not what it should look like.</p>
+      </div>
+
+      <div class="s2-col">
+        <div class="label">Emotional arc</div>
+        <div class="rule-short"></div>
+
+        <div style="display:flex;flex-direction:column;gap:20px;margin-bottom:28px;">
+          <div>
+            <div class="label" style="margin-bottom:8px;">The page feels like</div>
+            <input class="fill-field" type="text" placeholder="opening a well-made book…">
+          </div>
+          <div>
+            <div class="label" style="margin-bottom:8px;">By the CTA, the user feels</div>
+            <input class="fill-field" type="text" placeholder="quiet confidence…">
+          </div>
+        </div>
+
+        <div class="rule"></div>
+
+        <div class="label" style="margin-bottom:12px;">Choreography</div>
+        <div class="check-group">
+          <label class="check-row"><input type="checkbox"> <span>Staggered reveals</span></label>
+          <label class="check-row"><input type="checkbox"> <span>Scrubbed scroll</span></label>
+          <label class="check-row"><input type="checkbox"> <span>Pinned sections</span></label>
+          <label class="check-row"><input type="checkbox"> <span>Parallax depth</span></label>
+          <label class="check-row"><input type="checkbox"> <span>Instant / no motion</span></label>
+        </div>
+      </div>
+
+      <div class="s2-col">
+        <div class="label">Easing personality</div>
+        <div class="rule-short"></div>
+
+        <table class="easing-table">
+          <tr><td>Cinematic / authoritative</td><td>power4.inOut</td></tr>
+          <tr><td>Snappy / modern SaaS</td><td>expo.out</td></tr>
+          <tr><td>Organic / editorial</td><td>sine.inOut</td></tr>
+          <tr><td>Playful / physical</td><td>elastic.out / spring</td></tr>
+          <tr><td>Calm / luxury</td><td>long dur, subtle overshoot</td></tr>
+        </table>
+
+        <div class="rule" style="margin:20px 0 16px;"></div>
+
+        <div class="label" style="margin-bottom:8px;">Selected easing</div>
+        <input class="fill-field" type="text" placeholder="e.g. expo.out for exits, spring for interactions…">
+
+        <div class="rule" style="margin:20px 0 16px;"></div>
+
+        <div class="label" style="margin-bottom:12px;">Interactions feel</div>
+        <div class="check-group">
+          <label class="check-row"><input type="checkbox"> <span>Snap</span></label>
+          <label class="check-row"><input type="checkbox"> <span>Drift</span></label>
+          <label class="check-row"><input type="checkbox"> <span>Bounce / spring</span></label>
+          <label class="check-row"><input type="checkbox"> <span>None — content only</span></label>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ═══ SLIDE 3 ═══ -->
+  <div class="slide" id="slide-3">
+    <div class="top-rule"></div>
+    <span class="slide-num">03 / 04</span>
+    <div class="slide-inner">
+
+      <div class="s3-head">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;">
+          <div>
+            <div class="eyebrow">Section 03</div>
+            <h2 class="slide-title" style="font-size:clamp(32px,4.5vw,58px);">Aesthetic<br><em>Vocabulary</em></h2>
+          </div>
+          <p class="mono-sm" style="max-width:300px;text-align:right;">Quick-reference phrasing that translates cleanly into design decisions.</p>
+        </div>
+      </div>
+
+      <div class="s3-col">
+        <div class="label" style="margin-bottom:12px;">Density</div>
+        <div class="check-group" style="margin-bottom:24px;">
+          <label class="check-row"><input type="checkbox"> <span>Generous negative space</span></label>
+          <label class="check-row"><input type="checkbox"> <span>Controlled density</span></label>
+          <label class="check-row"><input type="checkbox"> <span>Maximal</span></label>
+        </div>
+        <div class="rule"></div>
+        <div class="label" style="margin:16px 0 12px;">Typography tone</div>
+        <div class="check-group">
+          <label class="check-row"><input type="checkbox"> <span>Editorial / serif</span></label>
+          <label class="check-row"><input type="checkbox"> <span>Technical / mono</span></label>
+          <label class="check-row"><input type="checkbox"> <span>Geometric / sans</span></label>
+          <label class="check-row"><input type="checkbox"> <span>Expressive / display</span></label>
+        </div>
+      </div>
+
+      <div class="s3-col">
+        <div class="label" style="margin-bottom:12px;">Color approach</div>
+        <div class="check-group" style="margin-bottom:24px;">
+          <label class="check-row"><input type="checkbox"> <span>Monochromatic</span></label>
+          <label class="check-row"><input type="checkbox"> <span>Dominant + sharp accent</span></label>
+          <label class="check-row"><input type="checkbox"> <span>Full palette</span></label>
+          <label class="check-row"><input type="checkbox"> <span>Neutral + texture</span></label>
+        </div>
+        <div class="rule"></div>
+        <div class="label" style="margin:16px 0 12px;">Decoration</div>
+        <div class="check-group">
+          <label class="check-row"><input type="checkbox"> <span>None — content only</span></label>
+          <label class="check-row"><input type="checkbox"> <span>Subtle (grain, border)</span></label>
+          <label class="check-row"><input type="checkbox"> <span>Atmospheric (gradient, glow)</span></label>
+          <label class="check-row"><input type="checkbox"> <span>Expressive</span></label>
+        </div>
+      </div>
+
+      <div class="s3-col">
+        <div class="label" style="margin-bottom:8px;">Vocabulary that lands</div>
+        <div class="rule-short"></div>
+        <table class="vocab-table">
+          <tr><td>Calm, editorial</td><td>"Objects settle, not pop"</td></tr>
+          <tr><td>Luxury</td><td>"Restraint over spectacle"</td></tr>
+          <tr><td>Developer</td><td>"Content-first, no decorative motion"</td></tr>
+          <tr><td>Playful</td><td>"Physical feel — things spring"</td></tr>
+          <tr><td>Cinematic</td><td>"Scrubbed scroll, 0.8s+ reveals"</td></tr>
+          <tr><td>Confident SaaS</td><td>"Snappy exits, generous entrances"</td></tr>
+        </table>
+      </div>
+
+      <div class="s3-footer">
+        <div class="label">Notes on overall aesthetic direction</div>
+        <input class="fill-field" type="text" style="max-width:500px;" placeholder="e.g. editorial but technical — restraint with moments of personality…">
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ═══ SLIDE 4 ═══ -->
+  <div class="slide" id="slide-4">
+    <div class="top-rule"></div>
+    <span class="slide-num">04 / 04</span>
+    <div class="slide-inner">
+
+      <div class="s4-head">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;">
+          <div>
+            <div class="eyebrow">Section 04 + 05</div>
+            <h2 class="slide-title" style="font-size:clamp(32px,4.5vw,58px);">Reference<br><em>& Friction</em></h2>
+          </div>
+          <p class="mono-sm" style="max-width:280px;text-align:right;">Tell Claude what to extract — and how to correct after the first output.</p>
+        </div>
+      </div>
+
+      <div class="s4-col">
+        <div class="label" style="margin-bottom:16px;">Reference URL</div>
+
+        <div class="url-input-wrap">
+          <span class="url-label">URL</span>
+          <input class="url-field" type="url" placeholder="https://…">
+        </div>
+
+        <div class="label" style="margin-bottom:12px;">Extract from this reference</div>
+        <div class="extract-group">
+          <label class="check-row"><input type="checkbox"> <span>Motion / easing</span></label>
+          <label class="check-row"><input type="checkbox"> <span>Layout rhythm</span></label>
+          <label class="check-row"><input type="checkbox"> <span>Type hierarchy</span></label>
+          <label class="check-row"><input type="checkbox"> <span>Color system</span></label>
+          <label class="check-row"><input type="checkbox"> <span>Spatial density</span></label>
+          <label class="check-row"><input type="checkbox"> <span>Interaction feel</span></label>
+        </div>
+
+        <div class="rule"></div>
+
+        <div class="label" style="margin-bottom:12px;">Ignore from this reference</div>
+        <div class="extract-group">
+          <label class="check-row"><input type="checkbox"> <span>Color</span></label>
+          <label class="check-row"><input type="checkbox"> <span>Imagery</span></label>
+          <label class="check-row"><input type="checkbox"> <span>Copy / brand</span></label>
+          <label class="check-row"><input type="checkbox"> <span>Overall style</span></label>
+        </div>
+
+        <div class="rule"></div>
+        <div class="label" style="margin-bottom:8px;">Notes on reference</div>
+        <input class="fill-field" type="text" placeholder="e.g. I like the scroll choreography, not the aesthetic…">
+      </div>
+
+      <div class="s4-col">
+        <div class="label" style="margin-bottom:16px;">Friction log — after first output</div>
+        <div class="rule-short"></div>
+
+        <div class="friction-row">
+          <span class="friction-sym keep">✓</span>
+          <input class="friction-field" type="text" placeholder="keep this…">
+        </div>
+        <div class="friction-row">
+          <span class="friction-sym cut">✗</span>
+          <input class="friction-field" type="text" placeholder="change this…">
+        </div>
+        <div class="friction-row">
+          <span class="friction-sym more">↑</span>
+          <input class="friction-field" type="text" placeholder="more of…">
+        </div>
+        <div class="friction-row">
+          <span class="friction-sym less">↓</span>
+          <input class="friction-field" type="text" placeholder="less of…">
+        </div>
+
+        <div class="rule" style="margin:24px 0 16px;"></div>
+
+        <div class="label" style="margin-bottom:12px;">Useful friction phrases</div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <p class="mono-sm">"Animations feel mechanical — add overshoot"</p>
+          <p class="mono-sm">"Too much motion — let content breathe"</p>
+          <p class="mono-sm">"Hierarchy is right, needs more weight contrast"</p>
+          <p class="mono-sm">"Easing feels instant — slow entrances to 0.6–0.8s"</p>
+          <p class="mono-sm">"Nothing feels weighted — reduce stagger"</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /deck -->
+
+
+<!-- NAV -->
+<div id="nav">
+  <button class="nav-arrow" id="prev" disabled>←</button>
+  <div id="dots"></div>
+  <button class="nav-arrow" id="next">→</button>
+</div>
+
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const dotsEl = document.getElementById('dots');
+const prevBtn = document.getElementById('prev');
+const nextBtn = document.getElementById('next');
+let current = 0;
+
+// Build dots
+slides.forEach((_, i) => {
+  const d = document.createElement('div');
+  d.className = 'nav-dot' + (i === 0 ? ' active' : '');
+  d.addEventListener('click', () => goTo(i));
+  dotsEl.appendChild(d);
+});
+
+function goTo(idx) {
+  if (idx === current) return;
+  const prev = slides[current];
+  const next = slides[idx];
+
+  prev.classList.add('leaving');
+  prev.addEventListener('animationend', () => {
+    prev.classList.remove('active', 'leaving');
+  }, { once: true });
+
+  next.classList.add('active', 'entering');
+  next.addEventListener('animationend', () => {
+    next.classList.remove('entering');
+  }, { once: true });
+
+  current = idx;
+  updateNav();
+}
+
+function updateNav() {
+  document.querySelectorAll('.nav-dot').forEach((d, i) =>
+    d.classList.toggle('active', i === current));
+  prevBtn.disabled = current === 0;
+  nextBtn.disabled = current === slides.length - 1;
+}
+
+prevBtn.addEventListener('click', () => { if (current > 0) goTo(current - 1); });
+nextBtn.addEventListener('click', () => { if (current < slides.length - 1) goTo(current + 1); });
+
+document.addEventListener('keydown', e => {
+  // Don't navigate if user is typing in a field
+  if (document.activeElement.tagName === 'INPUT') return;
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+    if (current < slides.length - 1) goTo(current + 1);
+  }
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+    if (current > 0) goTo(current - 1);
+  }
+});
+</script>
+
+</body>
+</html>
