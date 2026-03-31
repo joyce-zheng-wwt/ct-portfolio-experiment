@@ -32,7 +32,6 @@ body {
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
-  mix-blend-mode: normal;
   transition: transform 0.15s ease;
 }
 .cursor-ring {
@@ -42,7 +41,6 @@ body {
   border-radius: 50%;
   pointer-events: none;
   z-index: 9998;
-  mix-blend-mode: normal;
   transition: transform 0.08s ease, width 0.3s, height 0.3s, border-color 0.3s;
 }
 body:has(a:hover) .cursor-ring,
@@ -283,7 +281,6 @@ section { position: relative; z-index: 1; }
   color: var(--accent);
   margin-bottom: 16px;
 }
-.work-tag.red { color: var(--accent-red); }
 .work-name {
   font-family: var(--sans);
   font-weight: 700;
