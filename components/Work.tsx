@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function Work() {
   return (
     <section className="work" id="work">
@@ -10,6 +12,7 @@ export default function Work() {
       <div className="work-grid">
         {/* Item 1 — Signal Intelligence Platform */}
         <div className="work-item reveal">
+          <Link href="/work/signal-intelligence-platform" className="work-item-link" aria-label="Signal Intelligence Platform" />
           <div className="work-item-inner">
             <div className="work-item-visual">
               <svg className="visual-waveform" viewBox="0 0 600 160" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,6 +36,7 @@ export default function Work() {
 
         {/* Item 2 — Compass Design OS */}
         <div className="work-item reveal reveal-delay-1">
+          <Link href="/work/compass-design-os" className="work-item-link" aria-label="Compass Design OS" />
           <div className="work-item-inner">
             <div className="work-item-visual">
               <svg className="visual-radial" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -63,6 +67,7 @@ export default function Work() {
 
         {/* Item 3 — Process Architect */}
         <div className="work-item reveal reveal-delay-2">
+          <Link href="/work/process-architect" className="work-item-link" aria-label="Process Architect" />
           <div className="work-item-inner">
             <div className="work-item-visual">
               <svg viewBox="0 0 300 300" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -89,6 +94,7 @@ export default function Work() {
 
         {/* Item 4 — Foundation Model Interface */}
         <div className="work-item reveal reveal-delay-3">
+          <Link href="/work/foundation-model-interface" className="work-item-link" aria-label="Foundation Model Interface" />
           <div className="work-item-inner">
             <div className="work-item-visual">
               <svg viewBox="0 0 800 200" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
