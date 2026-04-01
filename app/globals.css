@@ -115,7 +115,7 @@ nav::after {
 .hero-tag {
   font-family: var(--mono);
   font-size: 10px;
-  color: var(--accent);
+  color: var(--accent-red);
   letter-spacing: 0.2em;
   text-transform: uppercase;
   margin-bottom: 32px;
@@ -128,7 +128,7 @@ nav::after {
   display: inline-block;
   width: 24px;
   height: 1px;
-  background: var(--accent);
+  background: var(--accent-red);
 }
 .hero-headline {
   font-family: var(--sans);
@@ -775,6 +775,16 @@ body::after {
   letter-spacing: 0.12em;
   color: var(--subtle);
 }
+.project-nav-present {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.project-nav-present:hover { color: var(--text); }
 
 /* ─────────────────────────────────────────────
    PROJECT DETAIL — HERO
@@ -1112,4 +1122,362 @@ body::after {
 @keyframes blink-cursor {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
+}
+
+/* ─────────────────────────────────────────────
+   PRESENTATION MODE
+───────────────────────────────────────────── */
+.pres-shell {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  cursor: none;
+  transition: background 0.3s, color 0.3s;
+}
+.pres-shell[data-theme="dark"],
+.pres-shell[data-theme="dark"]:fullscreen,
+.pres-shell[data-theme="dark"]:-webkit-full-screen {
+  --bg: #0d0d0d;
+  --surface: #161616;
+  --text: #f5f4f2;
+  --muted: #999;
+  --subtle: #666;
+  --border: rgba(245,244,242,0.1);
+  --accent: #8B80FF;
+  --accent-red: #E07A8F;
+  background: #0d0d0d;
+  color: #f5f4f2;
+}
+.pres-shell:fullscreen,
+.pres-shell:-webkit-full-screen {
+  width: 100vw;
+  height: 100vh;
+  background: var(--bg);
+}
+.pres-slide {
+  flex: 1;
+  padding: 72px 80px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s, color 0.3s;
+}
+.pres-slide.pres-entering {
+  animation: pres-enter 300ms cubic-bezier(0.16,1,0.3,1) forwards;
+}
+.pres-slide.pres-exiting {
+  animation: pres-exit 220ms ease-in forwards;
+}
+.pres-progress {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--border);
+}
+.pres-progress-fill {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+.pres-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 48px;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--border);
+}
+.pres-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.pres-bottombar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 48px;
+  flex-shrink: 0;
+}
+.pres-counter {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--subtle);
+}
+.pres-btn {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--subtle);
+  background: none;
+  border: 1px solid var(--border);
+  padding: 8px 16px;
+  cursor: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+.pres-btn:hover {
+  color: var(--text);
+  border-color: rgba(33,6,117,0.4);
+}
+.pres-shell[data-theme="dark"] .pres-btn:hover {
+  border-color: rgba(139,128,255,0.4);
+}
+.pres-back {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--subtle);
+  text-decoration: none;
+  transition: color 0.2s;
+  cursor: none;
+}
+.pres-back:hover { color: var(--text); }
+.pres-nav-hint {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--subtle);
+  text-transform: uppercase;
+}
+
+/* Slide layouts */
+.pres-title-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  height: 100%;
+}
+.pres-title-left { display: flex; flex-direction: column; gap: 32px; }
+.pres-title-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+.pres-title-headline {
+  font-family: var(--sans);
+  font-size: clamp(36px, 5vw, 72px);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin: 0;
+}
+.pres-title-headline .line-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--text);
+}
+.pres-title-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.pres-title-meta-item {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+.pres-title-meta-item span:first-child {
+  color: var(--subtle);
+  margin-right: 12px;
+  text-transform: uppercase;
+  font-size: 9px;
+}
+.pres-title-visual {
+  height: 60vh;
+  max-height: 480px;
+}
+
+/* Challenge slide */
+.pres-challenge-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  max-width: 900px;
+}
+.pres-challenge-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--subtle);
+  text-transform: uppercase;
+}
+.pres-challenge-statement {
+  font-family: var(--sans);
+  font-size: clamp(24px, 3.5vw, 48px);
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  margin: 0;
+}
+.pres-challenge-statement em {
+  font-style: italic;
+  color: var(--accent-red);
+}
+.pres-spec-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid var(--border);
+}
+.pres-spec-cell {
+  padding: 20px 24px;
+  border-right: 1px solid var(--border);
+}
+.pres-spec-cell:last-child { border-right: none; }
+.pres-spec-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--subtle);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.pres-spec-value {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--text);
+}
+
+/* Section slide */
+.pres-section-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  height: 100%;
+}
+.pres-section-layout.reversed { direction: rtl; }
+.pres-section-layout.reversed > * { direction: ltr; }
+.pres-section-left { display: flex; flex-direction: column; gap: 24px; }
+.pres-section-num {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--subtle);
+}
+.pres-section-title {
+  font-family: var(--sans);
+  font-size: clamp(28px, 3vw, 48px);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin: 0;
+}
+.pres-section-body {
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--muted);
+  max-width: 480px;
+}
+.pres-section-visual {
+  height: 55vh;
+  max-height: 420px;
+}
+
+/* Outcomes slide */
+.pres-outcomes-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  height: 100%;
+  justify-content: center;
+}
+.pres-outcomes-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--subtle);
+  text-transform: uppercase;
+}
+.pres-metric-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid var(--border);
+  flex: 1;
+  max-height: 280px;
+}
+.pres-metric-cell {
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid var(--border);
+}
+.pres-metric-cell:last-child { border-right: none; }
+.pres-metric-value {
+  font-family: var(--sans);
+  font-size: clamp(36px, 5vw, 72px);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin: 0 0 8px;
+}
+.pres-metric-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--subtle);
+  text-transform: uppercase;
+}
+
+/* Closing slide */
+.pres-closing-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  height: 100%;
+  justify-content: center;
+}
+.pres-closing-title {
+  font-family: var(--sans);
+  font-size: clamp(48px, 8vw, 120px);
+  font-weight: 300;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--text);
+  margin: 0;
+}
+.pres-closing-studio {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  color: var(--subtle);
+  text-transform: uppercase;
+}
+.pres-closing-url {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+}
+
+@keyframes pres-enter {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pres-exit {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-10px); }
 }

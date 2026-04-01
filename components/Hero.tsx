@@ -2,11 +2,13 @@ export default function Hero() {
   return (
     <section className="hero">
       <div className="hero-body">
-        <div className="hero-tag">Creative Technology — Est. 2024</div>
+        <div className="hero-tag" style={{ color: 'var(--accent-red)' }}>
+          Creative Technology — Est. 2024
+        </div>
         <h1 className="hero-headline">
-          We build<br />
-          <span className="line-accent">what doesn&apos;t</span>
-          <span className="line-accent" style={{ WebkitTextStroke: '1px rgba(117,26,46,0.3)' }}>exist yet.</span>
+          <span style={{ color: 'var(--accent-red)', display: 'block' }}>Design that</span>
+          <span style={{ color: 'transparent', WebkitTextStroke: '1.5px #751A2E', display: 'block' }}>thinks.</span>
+          <span style={{ color: 'var(--accent-red)', display: 'block' }}>Code that feels.</span>
         </h1>
         <div className="hero-meta">
           <p className="hero-desc">
