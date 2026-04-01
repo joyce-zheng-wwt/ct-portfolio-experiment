@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import type { ProjectData } from '@/lib/projects'
 import { slugVisualMap } from '@/components/visuals'
@@ -22,6 +22,7 @@ export default function PresentationShell({
   slug: string
 }) {
   const router = useRouter()
+  const shellRef = useRef<HTMLDivElement>(null)
   const [slide, setSlide] = useState(0)
   const [anim, setAnim] = useState<AnimState>('entering')
   const [theme, setTheme] = useState<'light' | 'dark'>('light')
@@ -72,7 +73,7 @@ export default function PresentationShell({
 
   function toggleFullscreen() {
     if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen()
+      shellRef.current?.requestFullscreen()
     } else {
       document.exitFullscreen()
     }
@@ -93,27 +94,19 @@ export default function PresentationShell({
   const progressPct = ((slide + 1) / TOTAL) * 100
 
   return (
-    <div className="pres-shell" data-theme={theme}>
-      {/* Controls */}
-      <div className="pres-controls">
-        <button
-          className="pres-btn"
-          onClick={() => router.back()}
-        >
-          ← Exit
-        </button>
-        <button
-          className="pres-btn"
-          onClick={() => setTheme(t => t === 'light' ? 'dark' : 'light')}
-        >
-          {theme === 'light' ? '◑ Dark' : '◐ Light'}
-        </button>
-        <button
-          className="pres-btn"
-          onClick={toggleFullscreen}
-        >
-          {isFullscreen ? '⊠ Exit Full' : '⛶ Fullscreen'}
-        </button>
+    <div ref={shellRef} className="pres-shell" data-theme={theme}>
+      {/* Top bar */}
+      <div className="pres-topbar">
+        <div className="pres-nav-hint">← → navigate · space advance · esc exit</div>
+        <div className="pres-controls">
+          <button className="pres-btn" onClick={() => router.back()}>← Exit</button>
+          <button className="pres-btn" onClick={() => setTheme(t => t === 'light' ? 'dark' : 'light')}>
+            {theme === 'light' ? '◑ Dark' : '◐ Light'}
+          </button>
+          <button className="pres-btn" onClick={toggleFullscreen}>
+            {isFullscreen ? '⊠ Exit Full' : '⛶ Fullscreen'}
+          </button>
+        </div>
       </div>
 
       {/* Slide */}
@@ -126,8 +119,11 @@ export default function PresentationShell({
       </div>
 
       {/* Bottom bar */}
-      <div className="pres-nav-hint">← → navigate · space advance · esc exit</div>
-      <div className="pres-counter">{counter}</div>
+      <div className="pres-bottombar">
+        <span />
+        <div className="pres-counter">{counter}</div>
+      </div>
+
       <div className="pres-progress">
         <div className="pres-progress-fill" style={{ width: `${progressPct}%` }} />
       </div>
